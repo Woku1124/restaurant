@@ -1,9 +1,11 @@
 # README
 
+
 Wymagane oprogramowanie:
 1. JDK 8 lub 9 (na 10 nie testowałem)
 2. Maven 3.3.9+ (albo ten wbudowany w IntelliJ)
 3. PostgreSQL (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+
 
 Instrukcja:
 1. Przed zainstalowaniem PostgreSQL ręcznie utworzyć katalog o nazwie "PostgreSQL", a w nim utworzyć katalog "data".
