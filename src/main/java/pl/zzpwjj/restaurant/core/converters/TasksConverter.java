@@ -16,7 +16,6 @@ public class TasksConverter {
         taskDto.setId(task.getId());
         taskDto.setTitle(task.getTitle());
         taskDto.setDescription(task.getDescription());
-
         return taskDto;
     }
 
