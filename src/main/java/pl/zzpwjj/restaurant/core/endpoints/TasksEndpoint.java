@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.converters.TasksConverter;
-import pl.zzpwjj.restaurant.core.model.Task;
+import pl.zzpwjj.restaurant.core.model.entities.Task;
 import pl.zzpwjj.restaurant.core.model.dto.AddTaskInput;
 import pl.zzpwjj.restaurant.core.model.dto.TaskDto;
 import pl.zzpwjj.restaurant.core.services.TasksService;
