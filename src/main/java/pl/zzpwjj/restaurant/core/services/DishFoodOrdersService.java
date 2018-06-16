@@ -29,21 +29,29 @@ public class DishFoodOrdersService {
         return dishFoodOrderRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addDishFoodOrder(final AddDishFoodOrderInput addDishFoodOrderInput) {
+    public DishFoodOrder addDishFoodOrder(final AddDishFoodOrderInput addDishFoodOrderInput) {
         DishFoodOrder dishFoodOrder = new DishFoodOrder();
         dishFoodOrder.setFood_order_id(addDishFoodOrderInput.getFood_order_id());
         dishFoodOrder.setDish_id(addDishFoodOrderInput.getDish_id());
-
-        dishFoodOrderRepository.save(dishFoodOrder);
+        return dishFoodOrderRepository.save(dishFoodOrder);
     }
 
     public void deleteDishFoodOrder(final Long id) throws ItemNotFoundException {
+        try {
+            dishFoodOrderRepository.deleteAllById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist", e);
+        }
+    }
+
+    public void deleteDishFoodOrdersByFoodOrderId(final Long id) throws ItemNotFoundException {
         try {
             dishFoodOrderRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist", e);
         }
     }
+
 
     public void editDishFoodOrder(final DishFoodOrderDto dishFoodOrderDto) throws InvalidParametersException {
         if (!dishFoodOrderRepository.existsById(dishFoodOrderDto.getId())) {

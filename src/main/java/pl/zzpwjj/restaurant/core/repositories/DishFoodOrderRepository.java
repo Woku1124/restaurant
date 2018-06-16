@@ -6,4 +6,7 @@ import pl.zzpwjj.restaurant.core.model.entities.DishFoodOrder;
 
 @Repository
 public interface DishFoodOrderRepository extends JpaRepository<DishFoodOrder, Long> {
+
+    void deleteAllById(Long id);
+
 }

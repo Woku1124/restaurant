@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.zzpwjj.restaurant.core.model.entities.Dish;
 import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
 
@@ -19,4 +20,5 @@ public class AddDishFoodOrderInput {
 
     @NotNull
     private Dish dish_id;
+
 }

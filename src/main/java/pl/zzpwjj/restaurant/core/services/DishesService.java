@@ -61,4 +61,8 @@ public class DishesService {
 
         dishesRepository.save(dish);
     }
+
+    public Dish getDishByName(final String name) throws ItemNotFoundException {
+        return dishesRepository.findByName(name);
+    }
 }

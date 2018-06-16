@@ -35,8 +35,7 @@ public class PersonalDatasService {
         personalData.setName(addPersonalDataInput.getName());
         personalData.setSurname(addPersonalDataInput.getSurname());
 
-        personalDatasRepository.save(personalData);
-        return personalData;
+        return personalDatasRepository.save(personalData);
     }
 
     public void deletePersonalData(final Long id) throws ItemNotFoundException {

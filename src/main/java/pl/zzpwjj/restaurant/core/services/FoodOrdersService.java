@@ -3,18 +3,16 @@ package pl.zzpwjj.restaurant.core.services;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.entities.Address;
+import pl.zzpwjj.restaurant.core.model.inputs.AddDishFoodOrderInput;
 import pl.zzpwjj.restaurant.core.model.inputs.AddFoodOrderInput;
 import pl.zzpwjj.restaurant.core.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
-import pl.zzpwjj.restaurant.core.repositories.AddressesRepository;
 import pl.zzpwjj.restaurant.core.repositories.FoodOrdersRepository;
 
 @Service
@@ -23,13 +21,17 @@ public class FoodOrdersService {
     private FoodOrdersRepository foodOrdersRepository;
     private AddressesService addressesService;
     private PersonalDatasService personalDatasService;
+    private DishFoodOrdersService dishFoodOrdersService;
+    private DishesService dishesService;
 
     @Autowired
     public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository, final AddressesService addressesService,
-                             final PersonalDatasService personalDatasService) {
+                             final PersonalDatasService personalDatasService, final DishFoodOrdersService dishFoodOrdersService,
+                             final DishesService dishesService) {
         this.foodOrdersRepository = foodOrdersRepository;
         this.addressesService = addressesService;
         this.personalDatasService = personalDatasService;
+        this.dishFoodOrdersService = dishFoodOrdersService;
     }
 
     public List<FoodOrder> getFoodOrders() {
@@ -40,20 +42,38 @@ public class FoodOrdersService {
         return foodOrdersRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) {
+    public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException{
         FoodOrder foodOrder = new FoodOrder();
+        Double fullPrice = 0d;
         foodOrder.setPersonal_data_id(personalDatasService.addPersonalData(addFoodOrderInput.getPersonal_data_id()));
         foodOrder.setAddress_id(addressesService.addAddress(addFoodOrderInput.getAddress_id()));
         foodOrder.setDate_of_order(LocalDate.now());
         foodOrder.setDate_of_realization(null);
-        foodOrder.setFull_price(10d);
+        for(String dishName : addFoodOrderInput.getDish_names()) {
+            try {
+                fullPrice += dishesService.getDishByName(dishName).getPrice();
+            } catch(ItemNotFoundException e){
+                throw new ItemNotFoundException("Dish with name = " + dishName + " does not exist", e);
+            }
+        }
+        foodOrder.setFull_price(fullPrice);
 
         foodOrdersRepository.save(foodOrder);
+
+        for(String dishName : addFoodOrderInput.getDish_names()) {
+            AddDishFoodOrderInput dishFoodOrder = new AddDishFoodOrderInput();
+            dishFoodOrder.setDish_id(dishesService.getDishByName(dishName));
+            dishFoodOrdersService.addDishFoodOrder(dishFoodOrder);
+        }
     }
 
     public void deleteFoodOrder(final Long id) throws ItemNotFoundException {
         try {
+            dishFoodOrdersService.deleteDishFoodOrdersByFoodOrderId(id);
+            FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
             foodOrdersRepository.deleteById(id);
+            personalDatasService.deletePersonalData(foodOrder.getPersonal_data_id().getId());
+            addressesService.deleteAddress(foodOrder.getAddress_id().getId());
         }
         catch (EmptyResultDataAccessException e) {
             throw new ItemNotFoundException("Food order with id = " + id + " does not exist", e);
@@ -82,6 +102,5 @@ public class FoodOrdersService {
         FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
         foodOrder.setDate_of_realization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
-
     }
 }

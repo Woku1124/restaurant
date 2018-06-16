@@ -67,7 +67,7 @@ public class FoodOrdersEndpoint {
     @ApiOperation(value = "Adds food order")
     @PostMapping("/addFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> addFoodOrder(@RequestBody @Valid final AddFoodOrderInput addFoodOrderInput) {
+    public ResponseEntity<Void> addFoodOrder(@RequestBody @Valid final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException {
         foodOrdersService.addFoodOrder(addFoodOrderInput);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

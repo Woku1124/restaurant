@@ -85,4 +85,17 @@ public class DishEndpoint {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Returns dish")
+    @GetMapping("/getDishByName")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<DishDto> getDish(@RequestParam("name") @NotNull final String name) {
+        DishDto dishDto;
+        try {
+            dishDto = dishesConverter.convertDish(dishesService.getDishByName(name));
+        } catch (ItemNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(dishDto, HttpStatus.OK);
+    }
 }

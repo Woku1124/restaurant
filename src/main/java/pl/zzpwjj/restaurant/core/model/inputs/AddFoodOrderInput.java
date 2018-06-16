@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -17,6 +19,9 @@ public class AddFoodOrderInput {
 
     @NotNull
     private AddAddressInput address_id;
+
+    @NotNull
+    private List<String> dish_names;
 
 
 }

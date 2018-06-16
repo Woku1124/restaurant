@@ -40,8 +40,7 @@ public class AddressesService {
         address.setHome_nr(addAddressInput.getHome_nr());
         address.setFlat_nr(addAddressInput.getFlat_nr());
 
-        addressesRepository.save(address);
-        return address;
+        return addressesRepository.save(address);
     }
 
     public void deleteAddress(final Long id) throws ItemNotFoundException {

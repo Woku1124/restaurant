@@ -74,6 +74,17 @@ public class DishFoodOrderEndpoint {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Removes dish food order")
+    @DeleteMapping("/deleteDishFoodOrdersByFoodOrderId")
+    public ResponseEntity<Void> deleteDishFoodOrdersByFoodOrderId(@RequestParam("id") @NotNull final Long id) {
+        try {
+            dishFoodOrdersService.deleteDishFoodOrdersByFoodOrderId(id);
+        } catch (ItemNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Edits dish food order")
     @PostMapping("/editDishFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)
