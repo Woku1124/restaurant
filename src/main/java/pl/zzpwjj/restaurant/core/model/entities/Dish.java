@@ -16,11 +16,11 @@ public class Dish {
 
     @ManyToOne
     @JoinColumn(name = "dish_type")
-    private DishType dishType;
+    private DishType dish_type_id;
 
     @ManyToOne
     @JoinColumn(name = "restaurant")
-    private Restaurant restaurant;
+    private Restaurant restaurant_id;
 
     @NotNull
     private Double price;
