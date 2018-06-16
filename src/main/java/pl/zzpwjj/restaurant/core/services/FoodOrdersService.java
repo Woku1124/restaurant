@@ -46,6 +46,7 @@ public class FoodOrdersService {
         foodOrder.setAddress_id(addressesService.addAddress(addFoodOrderInput.getAddress_id()));
         foodOrder.setDate_of_order(LocalDate.now());
         foodOrder.setDate_of_realization(null);
+        foodOrder.setFull_price(10d);
 
         foodOrdersRepository.save(foodOrder);
     }
@@ -72,5 +73,15 @@ public class FoodOrdersService {
         foodOrder.setFull_price(foodOrderDto.getFull_price());
 
         foodOrdersRepository.save(foodOrder);
+    }
+
+    public void realizeFoodOrder(final Long id) throws ItemNotFoundException {
+        if (!foodOrdersRepository.existsById(id)) {
+            throw new ItemNotFoundException("Food order with id = " + id + " does not exist");
+        }
+        FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
+        foodOrder.setDate_of_realization(LocalDate.now());
+        foodOrdersRepository.save(foodOrder);
+
     }
 }

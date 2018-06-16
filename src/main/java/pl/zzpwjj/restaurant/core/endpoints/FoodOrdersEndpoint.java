@@ -96,4 +96,16 @@ public class FoodOrdersEndpoint {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Marks food order as realized")
+    @PostMapping("/realizeFoodOrder")
+    public ResponseEntity<Void> realizeFoodOrder(@RequestParam("id") @NotNull final Long id) {
+        try {
+            foodOrdersService.realizeFoodOrder(id);
+        }
+        catch (ItemNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
