@@ -1,7 +1,9 @@
 package pl.zzpwjj.restaurant.core.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -36,8 +38,8 @@ public class FoodOrdersService {
         foodOrder.setPersonal_data_id(addFoodOrderInput.getPersonal_data_id());
         foodOrder.setRestaurant_id(addFoodOrderInput.getRestaurant_id());
         foodOrder.setAddress_id(addFoodOrderInput.getAddress_id());
-        foodOrder.setDate_of_order(addFoodOrderInput.getDate_of_order());
-        foodOrder.setDate_of_realization(addFoodOrderInput.getDate_of_realization());
+        foodOrder.setDate_of_order(LocalDate.now());
+        foodOrder.setDate_of_realization(null);
         foodOrder.setFull_price(addFoodOrderInput.getFull_price());
 
         foodOrdersRepository.save(foodOrder);

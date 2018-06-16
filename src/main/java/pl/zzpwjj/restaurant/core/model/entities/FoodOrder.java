@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -31,8 +31,8 @@ public class FoodOrder {
     private Double full_price;
 
     @NotNull
-    private Date date_of_order;
+    private LocalDate date_of_order;
 
-    private Date date_of_realization;
+    private LocalDate date_of_realization;
 
 }

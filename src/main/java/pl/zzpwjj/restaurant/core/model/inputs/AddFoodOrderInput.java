@@ -9,7 +9,6 @@ import pl.zzpwjj.restaurant.core.model.entities.Address;
 import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
 import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
 
-import java.util.Date;
 
 @Getter
 @Setter
@@ -28,8 +27,4 @@ public class AddFoodOrderInput {
     @NotNull
     private Double full_price;
 
-    @NotNull
-    private Date date_of_order;
-
-    private Date date_of_realization;
 }
