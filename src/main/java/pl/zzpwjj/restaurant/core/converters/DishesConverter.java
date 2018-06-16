@@ -15,7 +15,6 @@ public class DishesConverter {
         DishDto dishDto = new DishDto();
         dishDto.setId(dish.getId());
         dishDto.setDish_type_id(dish.getDish_type_id());
-        dishDto.setRestaurant_id(dish.getRestaurant_id());
         dishDto.setPrice(dish.getPrice());
         dishDto.setName(dish.getName());
         dishDto.setDescription(dish.getDescription());

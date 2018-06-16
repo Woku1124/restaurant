@@ -18,10 +18,6 @@ public class Dish {
     @JoinColumn(name = "dish_type")
     private DishType dish_type_id;
 
-    @ManyToOne
-    @JoinColumn(name = "restaurant")
-    private Restaurant restaurant_id;
-
     @NotNull
     private Double price;
 

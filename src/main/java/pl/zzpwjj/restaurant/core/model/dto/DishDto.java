@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.zzpwjj.restaurant.core.model.entities.DishType;
-import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
 
 import javax.validation.constraints.NotNull;
 
@@ -19,9 +18,6 @@ public class DishDto {
 
     @NotNull
     private DishType dish_type_id;
-
-    @NotNull
-    private Restaurant restaurant_id;
 
     @NotNull
     private Double price;
