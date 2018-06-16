@@ -1,5 +1,4 @@
 package pl.zzpwjj.restaurant.core.model.dto;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +8,7 @@ import pl.zzpwjj.restaurant.core.model.entities.Address;
 import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
 import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
