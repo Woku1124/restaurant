@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.dto.AddAddressInput;
+import pl.zzpwjj.restaurant.core.model.inputs.AddAddressInput;
 import pl.zzpwjj.restaurant.core.model.dto.AddressDto;
 import pl.zzpwjj.restaurant.core.model.entities.Address;
 import pl.zzpwjj.restaurant.core.repositories.AddressesRepository;

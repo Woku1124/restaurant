@@ -5,7 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.dto.AddPersonalDataInput;
+import pl.zzpwjj.restaurant.core.model.inputs.AddPersonalDataInput;
 import pl.zzpwjj.restaurant.core.model.dto.PersonalDataDto;
 import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
 import pl.zzpwjj.restaurant.core.repositories.PersonalDatasRepository;

@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.model.dto;
+package pl.zzpwjj.restaurant.core.model.inputs;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
