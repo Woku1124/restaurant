@@ -11,9 +11,10 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddTaskInput {
+public class DishTypeDto {
     @NotNull
-    private String title;
+    private Long id;
+
     @NotNull
-    private String description;
+    private String Name;
 }

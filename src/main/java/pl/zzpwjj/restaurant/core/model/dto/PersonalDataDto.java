@@ -11,9 +11,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddTaskInput {
+public class PersonalDataDto {
     @NotNull
-    private String title;
+    private Long id;
+
     @NotNull
-    private String description;
+    private String name;
+
+    @NotNull
+    private String surname;
 }

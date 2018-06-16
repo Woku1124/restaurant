@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.zzpwjj.restaurant.core.model.entities.Dish;
+import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,9 +13,14 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddTaskInput {
+public class DishFoodOrderDto {
+
     @NotNull
-    private String title;
+    private Long id;
+
     @NotNull
-    private String description;
+    private FoodOrder food_order_id;
+
+    @NotNull
+    private Dish dish_id;
 }

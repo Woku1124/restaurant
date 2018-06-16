@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.model.dto;
+package pl.zzpwjj.restaurant.core.model.inputs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddTaskInput {
+public class AddDishTypeInput {
+
     @NotNull
-    private String title;
-    @NotNull
-    private String description;
+    private String Name;
 }
