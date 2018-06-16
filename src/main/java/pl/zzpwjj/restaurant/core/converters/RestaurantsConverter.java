@@ -1,5 +1,6 @@
 package pl.zzpwjj.restaurant.core.converters;
 
+import org.springframework.stereotype.Component;
 import pl.zzpwjj.restaurant.core.model.dto.RestaurantDto;
 import pl.zzpwjj.restaurant.core.model.dto.TaskDto;
 import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
@@ -8,6 +9,7 @@ import pl.zzpwjj.restaurant.core.model.entities.Task;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class RestaurantsConverter {
     public RestaurantDto convertRestaurant(final Restaurant restaurant) {
         RestaurantDto restaurantDto = new RestaurantDto();

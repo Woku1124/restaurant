@@ -1,5 +1,6 @@
 package pl.zzpwjj.restaurant.core.converters;
 
+import org.springframework.stereotype.Component;
 import pl.zzpwjj.restaurant.core.model.dto.AddressDto;
 import pl.zzpwjj.restaurant.core.model.dto.DishFoodOrderDto;
 import pl.zzpwjj.restaurant.core.model.entities.Address;
@@ -8,6 +9,7 @@ import pl.zzpwjj.restaurant.core.model.entities.DishFoodOrder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class DishFoodOrdersConverter {
     public DishFoodOrderDto convertDishFoodOrder(final DishFoodOrder dishFoodOrder) {
         DishFoodOrderDto dishFoodOrderDto = new DishFoodOrderDto();
