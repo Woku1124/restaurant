@@ -10,19 +10,26 @@ import org.springframework.stereotype.Service;
 
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
+import pl.zzpwjj.restaurant.core.model.entities.Address;
 import pl.zzpwjj.restaurant.core.model.inputs.AddFoodOrderInput;
 import pl.zzpwjj.restaurant.core.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
+import pl.zzpwjj.restaurant.core.repositories.AddressesRepository;
 import pl.zzpwjj.restaurant.core.repositories.FoodOrdersRepository;
 
 @Service
 public class FoodOrdersService {
 
     private FoodOrdersRepository foodOrdersRepository;
+    private AddressesService addressesService;
+    private PersonalDatasService personalDatasService;
 
     @Autowired
-    public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository) {
+    public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository, final AddressesService addressesService,
+                             final PersonalDatasService personalDatasService) {
         this.foodOrdersRepository = foodOrdersRepository;
+        this.addressesService = addressesService;
+        this.personalDatasService = personalDatasService;
     }
 
     public List<FoodOrder> getFoodOrders() {
@@ -35,12 +42,10 @@ public class FoodOrdersService {
 
     public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) {
         FoodOrder foodOrder = new FoodOrder();
-        foodOrder.setPersonal_data_id(addFoodOrderInput.getPersonal_data_id());
-        foodOrder.setRestaurant_id(addFoodOrderInput.getRestaurant_id());
-        foodOrder.setAddress_id(addFoodOrderInput.getAddress_id());
+        foodOrder.setPersonal_data_id(personalDatasService.addPersonalData(addFoodOrderInput.getPersonal_data_id()));
+        foodOrder.setAddress_id(addressesService.addAddress(addFoodOrderInput.getAddress_id()));
         foodOrder.setDate_of_order(LocalDate.now());
         foodOrder.setDate_of_realization(null);
-        foodOrder.setFull_price(addFoodOrderInput.getFull_price());
 
         foodOrdersRepository.save(foodOrder);
     }

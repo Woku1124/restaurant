@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.zzpwjj.restaurant.core.model.entities.Address;
-import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
-import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
 
 
 @Getter
@@ -16,15 +13,10 @@ import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
 @NoArgsConstructor
 public class AddFoodOrderInput {
     @NotNull
-    private PersonalData personal_data_id;
+    private AddPersonalDataInput personal_data_id;
 
     @NotNull
-    private Address address_id;
+    private AddAddressInput address_id;
 
-    @NotNull
-    private Restaurant restaurant_id;
-
-    @NotNull
-    private Double full_price;
 
 }

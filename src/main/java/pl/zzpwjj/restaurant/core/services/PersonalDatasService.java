@@ -30,12 +30,13 @@ public class PersonalDatasService {
         return personalDatasRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addPersonalData(final AddPersonalDataInput addPersonalDataInput) {
+    public PersonalData addPersonalData(final AddPersonalDataInput addPersonalDataInput) {
         PersonalData personalData = new PersonalData();
         personalData.setName(addPersonalDataInput.getName());
         personalData.setSurname(addPersonalDataInput.getSurname());
 
         personalDatasRepository.save(personalData);
+        return personalData;
     }
 
     public void deletePersonalData(final Long id) throws ItemNotFoundException {

@@ -31,7 +31,7 @@ public class AddressesService {
         return addressesRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addAddress(final AddAddressInput addAddressInput) {
+    public Address addAddress(final AddAddressInput addAddressInput) {
         Address address = new Address();
         address.setPhone_nr(addAddressInput.getPhone_nr());
         address.setEmail(addAddressInput.getEmail());
@@ -41,6 +41,7 @@ public class AddressesService {
         address.setFlat_nr(addAddressInput.getFlat_nr());
 
         addressesRepository.save(address);
+        return address;
     }
 
     public void deleteAddress(final Long id) throws ItemNotFoundException {
