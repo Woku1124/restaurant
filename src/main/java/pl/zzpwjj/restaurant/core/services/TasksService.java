@@ -31,6 +31,13 @@ public class TasksService {
         return tasksRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
+    public Task getnada() throws ItemNotFoundException {
+        Task lol = new Task();
+        lol.setTitle("foooo");
+        lol.setDescription("fuYOu");
+        return lol;
+    }
+
     public void addTask(final AddTaskInput addTaskInput) {
         Task task = new Task();
         task.setTitle(addTaskInput.getTitle());
