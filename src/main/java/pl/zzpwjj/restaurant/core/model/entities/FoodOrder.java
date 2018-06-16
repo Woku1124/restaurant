@@ -23,10 +23,6 @@ public class FoodOrder {
     @JoinColumn(name = "address")
     private Address address_id;
 
-    @ManyToOne
-    @JoinColumn(name = "restaurant")
-    private Restaurant restaurant_id;
-
     @NotNull
     private Double full_price;
 

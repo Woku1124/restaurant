@@ -13,7 +13,6 @@ public class FoodOrdersConverter {
         FoodOrderDto foodOrderDto = new FoodOrderDto();
         foodOrderDto.setId(foodOrder.getId());
         foodOrderDto.setPersonal_data_id(foodOrder.getPersonal_data_id());
-        foodOrderDto.setRestaurant_id(foodOrder.getRestaurant_id());
         foodOrderDto.setAddress_id(foodOrder.getAddress_id());
         foodOrderDto.setDate_of_order(foodOrder.getDate_of_order());
         foodOrderDto.setDate_of_realization(foodOrder.getDate_of_realization());

@@ -66,7 +66,6 @@ public class FoodOrdersService {
         FoodOrder foodOrder = new FoodOrder();
         foodOrder.setId(foodOrderDto.getId());
         foodOrder.setPersonal_data_id(foodOrderDto.getPersonal_data_id());
-        foodOrder.setRestaurant_id(foodOrderDto.getRestaurant_id());
         foodOrder.setAddress_id(foodOrderDto.getAddress_id());
         foodOrder.setDate_of_order(foodOrderDto.getDate_of_order());
         foodOrder.setDate_of_realization(foodOrderDto.getDate_of_realization());
