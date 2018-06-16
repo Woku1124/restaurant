@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.zzpwjj.restaurant.core.model.entities.Address;
+import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
+import pl.zzpwjj.restaurant.core.model.entities.Restaurant;
 
 import java.util.Date;
 
@@ -17,10 +20,13 @@ public class FoodOrderDto {
     private Long id;
 
     @NotNull
-    private PersonalDataDto personal_data_id;
+    private PersonalData personal_data_id;
 
     @NotNull
-    private AddressDto address_id;
+    private Address address_id;
+
+    @NotNull
+    private Restaurant restaurant_id;
 
     @NotNull
     private Double full_price;

@@ -25,7 +25,7 @@ public class FoodOrder {
 
     @ManyToOne
     @JoinColumn(name = "restaurant")
-    private Restaurant restaurant;
+    private Restaurant restaurant_id;
 
     @NotNull
     private Double full_price;
