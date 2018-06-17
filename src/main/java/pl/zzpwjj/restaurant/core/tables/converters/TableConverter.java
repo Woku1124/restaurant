@@ -1,9 +1,9 @@
-package pl.zzpwjj.restaurant.core.converters;
+package pl.zzpwjj.restaurant.core.tables.converters;
 
 
 import org.springframework.stereotype.Component;
-import pl.zzpwjj.restaurant.core.model.dto.TableDto;
-import pl.zzpwjj.restaurant.core.model.entities.Table;
+import pl.zzpwjj.restaurant.core.tables.model.dto.TableDto;
+import pl.zzpwjj.restaurant.core.tables.model.entities.Table;
 
 import java.util.List;
 import java.util.stream.Collectors;

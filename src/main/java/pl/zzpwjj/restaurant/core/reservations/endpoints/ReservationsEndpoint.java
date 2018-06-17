@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.endpoints;
+package pl.zzpwjj.restaurant.core.reservations.endpoints;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.zzpwjj.restaurant.common.exceptions.DataSourceException;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.converters.ReservationConverter;
-import pl.zzpwjj.restaurant.core.model.dto.ReservationDto;
-import pl.zzpwjj.restaurant.core.model.inputs.AddReservationInput;
-import pl.zzpwjj.restaurant.core.services.ReservationService;
+import pl.zzpwjj.restaurant.core.reservations.converters.ReservationConverter;
+import pl.zzpwjj.restaurant.core.reservations.model.dto.ReservationDto;
+import pl.zzpwjj.restaurant.core.reservations.model.inputs.AddReservationInput;
+import pl.zzpwjj.restaurant.core.reservations.services.ReservationService;
+import pl.zzpwjj.restaurant.core.reservations.validators.ReservationsValidator;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -29,12 +30,14 @@ public class ReservationsEndpoint {
 
     private ReservationService reservationService;
     private ReservationConverter reservationConverter;
+    private ReservationsValidator reservationsValidator;
 
     @Autowired
-    public ReservationsEndpoint(final ReservationService reservationService, final ReservationConverter reservationConverter)
+    public ReservationsEndpoint(final ReservationService reservationService, final ReservationConverter reservationConverter, final ReservationsValidator reservationsValidator)
     {
         this.reservationConverter=reservationConverter;
         this.reservationService=reservationService;
+        this.reservationsValidator=reservationsValidator;
     }
     @ApiOperation(value = "Returns all reservations")
     @GetMapping("/getReservations")
@@ -62,6 +65,11 @@ public class ReservationsEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<String> reserveTable(@RequestBody @Valid final AddReservationInput addReservationInput)
     {
+        try {
+            reservationsValidator.validateAddReservationInput(addReservationInput);
+        } catch (InvalidParametersException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
         try {
             reservationService.addReservation(addReservationInput);
         } catch (DataSourceException | MessagingException | MailSendException e) {

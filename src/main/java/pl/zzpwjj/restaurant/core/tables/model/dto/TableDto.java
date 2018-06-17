@@ -1,10 +1,10 @@
-package pl.zzpwjj.restaurant.core.model.dto;
+package pl.zzpwjj.restaurant.core.tables.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.zzpwjj.restaurant.core.model.entities.Reservation;
+import pl.zzpwjj.restaurant.core.reservations.model.entities.Reservation;
 
 import javax.validation.constraints.NotNull;
 

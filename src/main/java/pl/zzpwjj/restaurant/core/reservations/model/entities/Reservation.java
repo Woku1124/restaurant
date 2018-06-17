@@ -1,8 +1,10 @@
-package pl.zzpwjj.restaurant.core.model.entities;
+package pl.zzpwjj.restaurant.core.reservations.model.entities;
 
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.zzpwjj.restaurant.core.model.entities.Address;
+import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

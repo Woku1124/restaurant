@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.endpoints;
+package pl.zzpwjj.restaurant.core.tables.endpoints;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,14 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.zzpwjj.restaurant.common.exceptions.DataSourceException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.converters.TableConverter;
-import pl.zzpwjj.restaurant.core.model.dto.TableDto;
-import pl.zzpwjj.restaurant.core.model.inputs.AddTableInput;
-import pl.zzpwjj.restaurant.core.services.TablesService;
+import pl.zzpwjj.restaurant.core.tables.converters.TableConverter;
+import pl.zzpwjj.restaurant.core.tables.model.dto.TableDto;
+import pl.zzpwjj.restaurant.core.tables.model.inputs.AddTableInput;
+import pl.zzpwjj.restaurant.core.tables.services.TablesService;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;

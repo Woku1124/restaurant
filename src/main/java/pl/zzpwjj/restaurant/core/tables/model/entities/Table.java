@@ -1,7 +1,8 @@
-package pl.zzpwjj.restaurant.core.model.entities;
+package pl.zzpwjj.restaurant.core.tables.model.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.zzpwjj.restaurant.core.reservations.model.entities.Reservation;
 
 import javax.persistence.*;
 
@@ -15,6 +16,5 @@ public class Table {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "reservations")
     private Reservation reservationId;
 }

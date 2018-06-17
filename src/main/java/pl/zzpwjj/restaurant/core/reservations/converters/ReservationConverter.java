@@ -1,10 +1,8 @@
-package pl.zzpwjj.restaurant.core.converters;
+package pl.zzpwjj.restaurant.core.reservations.converters;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.zzpwjj.restaurant.core.model.dto.ReservationDto;
-import pl.zzpwjj.restaurant.core.model.entities.Reservation;
+import pl.zzpwjj.restaurant.core.reservations.model.dto.ReservationDto;
+import pl.zzpwjj.restaurant.core.reservations.model.entities.Reservation;
 
 import java.util.List;
 import java.util.Optional;
