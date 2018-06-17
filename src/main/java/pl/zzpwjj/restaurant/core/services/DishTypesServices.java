@@ -6,19 +6,23 @@ import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.model.dto.DishTypeDto;
+import pl.zzpwjj.restaurant.core.model.entities.Dish;
 import pl.zzpwjj.restaurant.core.model.entities.DishType;
 import pl.zzpwjj.restaurant.core.model.inputs.AddDishTypeInput;
 import pl.zzpwjj.restaurant.core.repositories.DishTypesRepository;
+import pl.zzpwjj.restaurant.core.repositories.DishesRepository;
 
 import java.util.List;
 
 @Service
 public class DishTypesServices {
     private DishTypesRepository dishTypesRepository;
+    private DishesService dishesService;
 
     @Autowired
-    public DishTypesServices(final DishTypesRepository dishTypesRepository) {
+    public DishTypesServices(final DishTypesRepository dishTypesRepository, final DishesService dishesService) {
         this.dishTypesRepository = dishTypesRepository;
+        this.dishesService = dishesService;
     }
 
     public List<DishType> getDishTypes() {
@@ -38,6 +42,10 @@ public class DishTypesServices {
 
     public void deleteDishType(final Long id) throws ItemNotFoundException {
         try {
+            List<Dish> dishes = dishesService.getDishesWithTypeIdEqualsTo(id);
+            for(int i = 0; i < dishes.size(); i++){
+                dishesService.deleteDish(dishes.get(i).getId());
+            }
             dishTypesRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ItemNotFoundException("DishType with id = " + id + " does not exist", e);

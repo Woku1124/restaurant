@@ -5,6 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
+import pl.zzpwjj.restaurant.core.foodOrders.services.DishFoodOrdersService;
 import pl.zzpwjj.restaurant.core.model.dto.DishDto;
 import pl.zzpwjj.restaurant.core.model.entities.Dish;
 import pl.zzpwjj.restaurant.core.model.entities.Rating;
@@ -30,6 +31,14 @@ public class DishesService {
 
     public List<Dish> getDishes() {
         return dishesRepository.findAll();
+    }
+
+    public List<Dish> getDishesWithTypeNameEqualsTo(String name) {
+        return dishesRepository.findAllByDishType_Name(name);
+    }
+
+    public List<Dish> getDishesWithTypeIdEqualsTo(Long id) {
+        return dishesRepository.findAllByDishType_Id(id);
     }
 
     public Dish getDish(final Long id) throws ItemNotFoundException {

@@ -42,11 +42,11 @@ public class RatingsEndpoint {
         return new ResponseEntity<>(ratingDtos, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Returns all ratings with dish id equals to")
-    @GetMapping("/getRatingswithDishIdEqualsTo")
+    @ApiOperation(value = "Returns all ratings with dish name equals to")
+    @GetMapping("/getRatingswithDishNameEqualsTo")
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<List<RatingDto>> getRatingswithDishIdEqualsTo(@RequestParam("dishId") @NotNull final Long Id) {
-        List<RatingDto> ratingDtos = ratingsConverter.convertRatings(ratingsService.getRatingsWithDishIdEqualsTo(Id));
+    public ResponseEntity<List<RatingDto>> getRatingswithDishIdEqualsTo(@RequestParam("name") @NotNull final String name) {
+        List<RatingDto> ratingDtos = ratingsConverter.convertRatings(ratingsService.getRatingsWithDishNameEqualsTo(name));
         return new ResponseEntity<>(ratingDtos, HttpStatus.OK);
     }
 

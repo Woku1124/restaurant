@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.reservations.model.dto;
+package pl.zzpwjj.restaurant.core.foodOrders.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,23 +8,27 @@ import pl.zzpwjj.restaurant.core.foodOrders.model.entities.Address;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.PersonalData;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationDto {
+public class FoodOrderDto {
     @NotNull
     private Long id;
 
     @NotNull
-    private PersonalData clientPersonalDataId;
+    private PersonalData personalData;
 
     @NotNull
-    private Address addressId;
+    private Address address;
 
     @NotNull
-    private LocalDateTime reservationDateTime;
+    private Double full_price;
 
+    @NotNull
+    private LocalDate dateOfOrder;
+
+    private LocalDate dateOfRealization;
 }

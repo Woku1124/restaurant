@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.services;
+package pl.zzpwjj.restaurant.core.foodOrders.services;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.inputs.AddAddressInput;
-import pl.zzpwjj.restaurant.core.model.dto.AddressDto;
-import pl.zzpwjj.restaurant.core.model.entities.Address;
-import pl.zzpwjj.restaurant.core.repositories.AddressesRepository;
+import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddAddressInput;
+import pl.zzpwjj.restaurant.core.foodOrders.model.dto.AddressDto;
+import pl.zzpwjj.restaurant.core.foodOrders.model.entities.Address;
+import pl.zzpwjj.restaurant.core.foodOrders.repositories.AddressesRepository;
 
 @Service
 public class AddressesService {

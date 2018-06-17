@@ -14,5 +14,5 @@ import javax.validation.constraints.NotNull;
 public class AddDishTypeInput {
 
     @NotNull
-    private String Name;
+    private String name;
 }

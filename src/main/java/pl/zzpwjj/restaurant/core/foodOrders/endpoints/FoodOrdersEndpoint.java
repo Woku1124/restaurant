@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.endpoints;
+package pl.zzpwjj.restaurant.core.foodOrders.endpoints;
 
 import java.util.List;
 
@@ -24,10 +24,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.converters.FoodOrdersConverter;
-import pl.zzpwjj.restaurant.core.model.dto.FoodOrderDto;
-import pl.zzpwjj.restaurant.core.model.inputs.AddFoodOrderInput;
-import pl.zzpwjj.restaurant.core.services.FoodOrdersService;
+import pl.zzpwjj.restaurant.core.foodOrders.converters.FoodOrdersConverter;
+import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
+import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddFoodOrderInput;
+import pl.zzpwjj.restaurant.core.foodOrders.services.FoodOrdersService;
 
 @RequestMapping("/foodOrders")
 @Api(value = "Food orders endpoint")

@@ -17,6 +17,6 @@ public class DishType {
     private Long id;
 
     @NotNull
-    private String Name;
+    private String name;
 
 }
