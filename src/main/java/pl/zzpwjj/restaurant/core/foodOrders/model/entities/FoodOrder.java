@@ -2,6 +2,7 @@ package pl.zzpwjj.restaurant.core.foodOrders.model.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ public class FoodOrder {
     private Address address;
 
     @NotNull
+    @Range(min = 0, message = "Please select positive numbers only")
     private Double full_price;
 
     @NotNull

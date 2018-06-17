@@ -28,7 +28,7 @@ public class AddressDto {
     private String street;
 
     @NotNull
-    private int homeNr;
+    private Integer homeNr;
 
-    private int flatNr;
+    private Integer flatNr;
 }
