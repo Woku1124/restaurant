@@ -1,9 +1,7 @@
 package pl.zzpwjj.restaurant.core.employees.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.employees.model.dto.EmployeeDto;
 import pl.zzpwjj.restaurant.core.employees.model.entities.Employee;
@@ -11,8 +9,6 @@ import pl.zzpwjj.restaurant.core.employees.model.inputs.AddEmployeeInput;
 import pl.zzpwjj.restaurant.core.employees.repositories.EmployeesRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 @Service
 public class EmployeesService {
