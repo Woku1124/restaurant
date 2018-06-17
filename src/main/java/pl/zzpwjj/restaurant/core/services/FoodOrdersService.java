@@ -15,6 +15,8 @@ import pl.zzpwjj.restaurant.core.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
 import pl.zzpwjj.restaurant.core.repositories.FoodOrdersRepository;
 
+import javax.mail.MessagingException;
+
 @Service
 public class FoodOrdersService {
 
@@ -23,15 +25,18 @@ public class FoodOrdersService {
     private PersonalDatasService personalDatasService;
     private DishFoodOrdersService dishFoodOrdersService;
     private DishesService dishesService;
+    private RestaurantEmailSenderService emailSenderService;
 
     @Autowired
     public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository, final AddressesService addressesService,
                              final PersonalDatasService personalDatasService, final DishFoodOrdersService dishFoodOrdersService,
-                             final DishesService dishesService) {
+                             final DishesService dishesService, RestaurantEmailSenderService emailSenderService) {
         this.foodOrdersRepository = foodOrdersRepository;
         this.addressesService = addressesService;
         this.personalDatasService = personalDatasService;
         this.dishFoodOrdersService = dishFoodOrdersService;
+        this.dishesService = dishesService;
+        this.emailSenderService = emailSenderService;
     }
 
     public List<FoodOrder> getFoodOrders() {
@@ -47,7 +52,7 @@ public class FoodOrdersService {
         return foodOrdersRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException{
+    public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException, MessagingException{
         FoodOrder foodOrder = new FoodOrder();
         Double fullPrice = 0d;
         foodOrder.setPersonal_data_id(personalDatasService.addPersonalData(addFoodOrderInput.getPersonal_data_id()));
@@ -62,9 +67,6 @@ public class FoodOrdersService {
             }
         }
 
-
-
-
         foodOrder.setFull_price(fullPrice);
 
         foodOrdersRepository.save(foodOrder);
@@ -74,6 +76,15 @@ public class FoodOrdersService {
             dishFoodOrder.setDish_id(dishesService.getDishByName(dishName));
             dishFoodOrdersService.addDishFoodOrder(dishFoodOrder);
         }
+
+        try {
+            emailSenderService.sendEmail(foodOrder.getAddress_id().getEmail(), "We received your order",
+                    "Potwierdzamy złożenie zamówienia nr " + foodOrder.getId());
+        }
+        catch(MessagingException e){
+            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress_id().getEmail(), e);
+        }
+
     }
 
     public void deleteFoodOrder(final Long id) throws ItemNotFoundException {
@@ -104,13 +115,20 @@ public class FoodOrdersService {
         foodOrdersRepository.save(foodOrder);
     }
 
-    public void realizeFoodOrder(final Long id) throws ItemNotFoundException {
+    public void realizeFoodOrder(final Long id) throws ItemNotFoundException, MessagingException {
         if (!foodOrdersRepository.existsById(id)) {
             throw new ItemNotFoundException("Food order with id = " + id + " does not exist");
         }
         FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
         foodOrder.setDate_of_realization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
+        try {
+            emailSenderService.sendEmail(foodOrder.getAddress_id().getEmail(), "Your order was realized",
+                    "We hope you will order from us again");
+        }
+        catch(MessagingException e){
+            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress_id().getEmail(), e);
+        }
     }
 
 }

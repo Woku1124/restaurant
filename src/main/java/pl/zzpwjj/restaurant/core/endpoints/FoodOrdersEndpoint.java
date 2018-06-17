@@ -2,6 +2,7 @@ package pl.zzpwjj.restaurant.core.endpoints;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -75,7 +76,7 @@ public class FoodOrdersEndpoint {
     @ApiOperation(value = "Adds food order")
     @PostMapping("/addFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> addFoodOrder(@RequestBody @Valid final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException {
+    public ResponseEntity<Void> addFoodOrder(@RequestBody @Valid final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException, MessagingException {
         foodOrdersService.addFoodOrder(addFoodOrderInput);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -107,7 +108,7 @@ public class FoodOrdersEndpoint {
 
     @ApiOperation(value = "Marks food order as realized")
     @PostMapping("/realizeFoodOrder")
-    public ResponseEntity<Void> realizeFoodOrder(@RequestParam("id") @NotNull final Long id) {
+    public ResponseEntity<Void> realizeFoodOrder(@RequestParam("id") @NotNull final Long id) throws MessagingException {
         try {
             foodOrdersService.realizeFoodOrder(id);
         }
