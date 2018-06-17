@@ -15,6 +15,7 @@ import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.FoodOrder;
 import pl.zzpwjj.restaurant.core.foodOrders.repositories.FoodOrdersRepository;
 import pl.zzpwjj.restaurant.core.dishes.services.DishesService;
+import pl.zzpwjj.restaurant.core.services.EmailSenderService;
 import pl.zzpwjj.restaurant.core.services.RestaurantEmailSenderService;
 
 import javax.mail.MessagingException;
@@ -27,12 +28,12 @@ public class FoodOrdersService {
     private PersonalDatasService personalDatasService;
     private DishFoodOrdersService dishFoodOrdersService;
     private DishesService dishesService;
-    private RestaurantEmailSenderService emailSenderService;
+    private EmailSenderService emailSenderService;
 
     @Autowired
     public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository, final AddressesService addressesService,
                              final PersonalDatasService personalDatasService, final DishFoodOrdersService dishFoodOrdersService,
-                             final DishesService dishesService, RestaurantEmailSenderService emailSenderService) {
+                             final DishesService dishesService, EmailSenderService emailSenderService) {
         this.foodOrdersRepository = foodOrdersRepository;
         this.addressesService = addressesService;
         this.personalDatasService = personalDatasService;
@@ -80,13 +81,9 @@ public class FoodOrdersService {
             dishFoodOrdersService.addDishFoodOrder(dishFoodOrder);
         }
 
-        try {
-            emailSenderService.sendEmail(foodOrder.getAddress().getEmail(), "We received your order",
+        emailSenderService.send(foodOrder.getAddress().getEmail(), "We received your order",
                     "Potwierdzamy złożenie zamówienia nr " + foodOrder.getId());
-        }
-        catch(MessagingException e){
-            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress().getEmail(), e);
-        }
+
         return order;
     }
 
@@ -126,7 +123,7 @@ public class FoodOrdersService {
         foodOrder.setDateOfRealization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
         try {
-            emailSenderService.sendEmail(foodOrder.getAddress().getEmail(), "Your order was realized",
+            emailSenderService.send(foodOrder.getAddress().getEmail(), "Your order was realized",
                     "We hope you will order from us again");
         }
         catch(MessagingException e){
