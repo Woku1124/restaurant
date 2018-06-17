@@ -19,7 +19,7 @@ public class FoodOrderDto {
     private Long id;
 
     @NotNull
-    private PersonalData personal_data;
+    private PersonalData personalData;
 
     @NotNull
     private Address address;
@@ -28,7 +28,7 @@ public class FoodOrderDto {
     private Double full_price;
 
     @NotNull
-    private LocalDate date_of_order;
+    private LocalDate dateOfOrder;
 
-    private LocalDate date_of_realization;
+    private LocalDate dateOfRealization;
 }

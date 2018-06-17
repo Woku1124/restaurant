@@ -13,7 +13,7 @@ public class DishFoodOrdersConverter {
         DishFoodOrderDto dishFoodOrderDto = new DishFoodOrderDto();
         dishFoodOrderDto.setId(dishFoodOrder.getId());
         dishFoodOrderDto.setDish(dishFoodOrder.getDish());
-        dishFoodOrderDto.setFood_order(dishFoodOrder.getFood_order());
+        dishFoodOrderDto.setFoodOrder(dishFoodOrder.getFoodOrder());
         return dishFoodOrderDto;
     }
 

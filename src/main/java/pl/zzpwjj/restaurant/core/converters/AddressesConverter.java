@@ -12,12 +12,12 @@ public class AddressesConverter {
     public AddressDto convertAddress(final Address address) {
         AddressDto addressDto = new AddressDto();
         addressDto.setId(address.getId());
-        addressDto.setPhone_nr(address.getPhone_nr());
+        addressDto.setPhone_nr(address.getPhoneNr());
         addressDto.setEmail(address.getEmail());
         addressDto.setCity(address.getCity());
         addressDto.setStreet(address.getStreet());
-        addressDto.setHome_nr(address.getHome_nr());
-        addressDto.setFlat_nr(address.getFlat_nr());
+        addressDto.setHomeNr(address.getHomeNr());
+        addressDto.setFlatNr(address.getFlatNr());
         return addressDto;
     }
 

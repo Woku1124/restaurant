@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface FoodOrdersRepository extends JpaRepository<FoodOrder, Long> {
 
-    @Query("SELECT fo FROM food_order fo WHERE fo.date_of_realization = null")
+    @Query("SELECT fo FROM food_order fo WHERE fo.dateOfRealization = null")
     List<FoodOrder> findAllWhereDateOfRealizationIsNull();
 }

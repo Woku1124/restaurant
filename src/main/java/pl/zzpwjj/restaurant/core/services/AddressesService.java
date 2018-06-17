@@ -33,12 +33,12 @@ public class AddressesService {
 
     public Address addAddress(final AddAddressInput addAddressInput) {
         Address address = new Address();
-        address.setPhone_nr(addAddressInput.getPhone_nr());
+        address.setPhoneNr(addAddressInput.getPhoneNr());
         address.setEmail(addAddressInput.getEmail());
         address.setCity(addAddressInput.getCity());
         address.setStreet(addAddressInput.getStreet());
-        address.setHome_nr(addAddressInput.getHome_nr());
-        address.setFlat_nr(addAddressInput.getFlat_nr());
+        address.setHomeNr(addAddressInput.getHomeNr());
+        address.setFlatNr(addAddressInput.getFlatNr());
 
         return addressesRepository.save(address);
     }
@@ -59,12 +59,12 @@ public class AddressesService {
 
         Address address = new Address();
         address.setId(addressDto.getId());
-        address.setPhone_nr(addressDto.getPhone_nr());
+        address.setPhoneNr(addressDto.getPhone_nr());
         address.setEmail(addressDto.getEmail());
         address.setCity(addressDto.getCity());
         address.setStreet(addressDto.getStreet());
-        address.setHome_nr(addressDto.getHome_nr());
-        address.setFlat_nr(addressDto.getFlat_nr());
+        address.setHomeNr(addressDto.getHomeNr());
+        address.setFlatNr(addressDto.getFlatNr());
 
         addressesRepository.save(address);
     }

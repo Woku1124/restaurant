@@ -17,7 +17,7 @@ public class FoodOrder {
 
     @OneToOne
     @JoinColumn(name = "personal_data")
-    private PersonalData personal_data;
+    private PersonalData personalData;
 
     @OneToOne
     @JoinColumn(name = "address")
@@ -27,8 +27,8 @@ public class FoodOrder {
     private Double full_price;
 
     @NotNull
-    private LocalDate date_of_order;
+    private LocalDate dateOfOrder;
 
-    private LocalDate date_of_realization;
+    private LocalDate dateOfRealization;
 
 }

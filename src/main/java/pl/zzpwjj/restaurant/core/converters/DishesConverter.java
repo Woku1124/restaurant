@@ -12,7 +12,7 @@ public class DishesConverter {
     public DishDto convertDish(final Dish dish) {
         DishDto dishDto = new DishDto();
         dishDto.setId(dish.getId());
-        dishDto.setDish_type(dish.getDish_type());
+        dishDto.setDishType(dish.getDishType());
         dishDto.setPrice(dish.getPrice());
         dishDto.setName(dish.getName());
         dishDto.setDescription(dish.getDescription());

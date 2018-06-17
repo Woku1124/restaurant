@@ -31,7 +31,7 @@ public class DishFoodOrdersService {
 
     public DishFoodOrder addDishFoodOrder(final AddDishFoodOrderInput addDishFoodOrderInput) {
         DishFoodOrder dishFoodOrder = new DishFoodOrder();
-        dishFoodOrder.setFood_order(addDishFoodOrderInput.getFood_order());
+        dishFoodOrder.setFoodOrder(addDishFoodOrderInput.getFoodOrder());
         dishFoodOrder.setDish(addDishFoodOrderInput.getDish());
         return dishFoodOrderRepository.save(dishFoodOrder);
     }
@@ -60,7 +60,7 @@ public class DishFoodOrdersService {
 
         DishFoodOrder dishFoodOrder = new DishFoodOrder();
         dishFoodOrder.setId(dishFoodOrderDto.getId());
-        dishFoodOrder.setFood_order(dishFoodOrderDto.getFood_order());
+        dishFoodOrder.setFoodOrder(dishFoodOrderDto.getFoodOrder());
         dishFoodOrder.setDish(dishFoodOrderDto.getDish());
 
         dishFoodOrderRepository.save(dishFoodOrder);

@@ -17,7 +17,7 @@ public class Address {
     private Long id;
 
     @NotNull
-    private Long phone_nr;
+    private Long phoneNr;
 
     @NotNull
     private String email;
@@ -29,9 +29,9 @@ public class Address {
     private String street;
 
     @NotNull
-    private int home_nr;
+    private int homeNr;
 
-    private int flat_nr;
+    private int flatNr;
 
 
 }

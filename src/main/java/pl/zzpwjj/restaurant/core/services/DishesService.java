@@ -38,7 +38,7 @@ public class DishesService {
 
     public void addDish(final AddDishInput addDishInput) {
         Dish dish = new Dish();
-        dish.setDish_type(addDishInput.getDish_type());
+        dish.setDishType(addDishInput.getDishType());
         dish.setPrice(addDishInput.getPrice());
         dish.setName(addDishInput.getName());
         dish.setDescription(addDishInput.getDescription());
@@ -65,7 +65,7 @@ public class DishesService {
 
         Dish dish = new Dish();
         dish.setId(dishDto.getId());
-        dish.setDish_type(dishDto.getDish_type());
+        dish.setDishType(dishDto.getDishType());
         dish.setPrice(dishDto.getPrice());
         dish.setName(dishDto.getName());
         dish.setDescription(dishDto.getDescription());

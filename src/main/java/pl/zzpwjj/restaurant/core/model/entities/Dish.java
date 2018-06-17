@@ -16,7 +16,7 @@ public class Dish {
 
     @ManyToOne
     @JoinColumn(name = "dish_type")
-    private DishType dish_type;
+    private DishType dishType;
 
     @NotNull
     private Double price;

@@ -12,10 +12,10 @@ public class FoodOrdersConverter {
     public FoodOrderDto convertFoodOrder(final FoodOrder foodOrder) {
         FoodOrderDto foodOrderDto = new FoodOrderDto();
         foodOrderDto.setId(foodOrder.getId());
-        foodOrderDto.setPersonal_data(foodOrder.getPersonal_data());
+        foodOrderDto.setPersonalData(foodOrder.getPersonalData());
         foodOrderDto.setAddress(foodOrder.getAddress());
-        foodOrderDto.setDate_of_order(foodOrder.getDate_of_order());
-        foodOrderDto.setDate_of_realization(foodOrder.getDate_of_realization());
+        foodOrderDto.setDateOfOrder(foodOrder.getDateOfOrder());
+        foodOrderDto.setDateOfRealization(foodOrder.getDateOfRealization());
         foodOrderDto.setFull_price(foodOrder.getFull_price());
         return foodOrderDto;
     }

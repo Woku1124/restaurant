@@ -55,11 +55,11 @@ public class FoodOrdersService {
     public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException, MessagingException{
         FoodOrder foodOrder = new FoodOrder();
         Double fullPrice = 0d;
-        foodOrder.setPersonal_data(personalDatasService.addPersonalData(addFoodOrderInput.getPersonal_data()));
+        foodOrder.setPersonalData(personalDatasService.addPersonalData(addFoodOrderInput.getPersonalData()));
         foodOrder.setAddress(addressesService.addAddress(addFoodOrderInput.getAddress()));
-        foodOrder.setDate_of_order(LocalDate.now());
-        foodOrder.setDate_of_realization(null);
-        for(String dishName : addFoodOrderInput.getDish_names()) {
+        foodOrder.setDateOfOrder(LocalDate.now());
+        foodOrder.setDateOfRealization(null);
+        for(String dishName : addFoodOrderInput.getDishNames()) {
             try {
                 fullPrice += dishesService.getDishByName(dishName).getPrice();
             } catch(ItemNotFoundException e){
@@ -71,7 +71,7 @@ public class FoodOrdersService {
 
         foodOrdersRepository.save(foodOrder);
 
-        for(String dishName : addFoodOrderInput.getDish_names()) {
+        for(String dishName : addFoodOrderInput.getDishNames()) {
             AddDishFoodOrderInput dishFoodOrder = new AddDishFoodOrderInput();
             dishFoodOrder.setDish(dishesService.getDishByName(dishName));
             dishFoodOrdersService.addDishFoodOrder(dishFoodOrder);
@@ -92,7 +92,7 @@ public class FoodOrdersService {
             dishFoodOrdersService.deleteDishFoodOrdersByFoodOrderId(id);
             FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
             foodOrdersRepository.deleteById(id);
-            personalDatasService.deletePersonalData(foodOrder.getPersonal_data().getId());
+            personalDatasService.deletePersonalData(foodOrder.getPersonalData().getId());
             addressesService.deleteAddress(foodOrder.getAddress().getId());
         }
         catch (EmptyResultDataAccessException e) {
@@ -106,10 +106,10 @@ public class FoodOrdersService {
         }
         FoodOrder foodOrder = new FoodOrder();
         foodOrder.setId(foodOrderDto.getId());
-        foodOrder.setPersonal_data(foodOrderDto.getPersonal_data());
+        foodOrder.setPersonalData(foodOrderDto.getPersonalData());
         foodOrder.setAddress(foodOrderDto.getAddress());
-        foodOrder.setDate_of_order(foodOrderDto.getDate_of_order());
-        foodOrder.setDate_of_realization(foodOrderDto.getDate_of_realization());
+        foodOrder.setDateOfOrder(foodOrderDto.getDateOfOrder());
+        foodOrder.setDateOfRealization(foodOrderDto.getDateOfRealization());
         foodOrder.setFull_price(foodOrderDto.getFull_price());
 
         foodOrdersRepository.save(foodOrder);
@@ -120,7 +120,7 @@ public class FoodOrdersService {
             throw new ItemNotFoundException("Food order with id = " + id + " does not exist");
         }
         FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
-        foodOrder.setDate_of_realization(LocalDate.now());
+        foodOrder.setDateOfRealization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
         try {
             emailSenderService.sendEmail(foodOrder.getAddress().getEmail(), "Your order was realized",

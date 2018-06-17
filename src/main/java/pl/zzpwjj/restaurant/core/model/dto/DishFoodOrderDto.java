@@ -19,7 +19,7 @@ public class DishFoodOrderDto {
     private Long id;
 
     @NotNull
-    private FoodOrder food_order;
+    private FoodOrder foodOrder;
 
     @NotNull
     private Dish dish;

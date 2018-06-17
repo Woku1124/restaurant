@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class AddDishInput {
 
     @NotNull
-    private DishType dish_type;
+    private DishType dishType;
 
     @NotNull
     private Double price;
