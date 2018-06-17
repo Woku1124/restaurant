@@ -36,17 +36,18 @@ public class TablesService {
 
     public List<Table> getFreeTables()
     {
-        return tablesRepository.findAll().stream().filter(e -> e.getReservation()!=null).collect(Collectors.toList());
+        return tablesRepository.findAll().stream().filter(e -> e.getReservationId()==null).collect(Collectors.toList());
     }
 
     public void reserveTable(Reservation reservation, Table table){
-        table.setReservation(reservation);
+        table.setReservationId(reservation);
+        tablesRepository.save(table);
     }
 
     public void addTable(AddTableInput addTableInput)
     {
         Table table = new Table();
-        table.setReservation(addTableInput.getReservationId());
+        table.setReservationId(addTableInput.getReservationId());
 
         tablesRepository.save(table);
     }
@@ -54,7 +55,7 @@ public class TablesService {
     public void deleteTable(final Long id) throws ItemNotFoundException {
         try {
             Table table = tablesRepository.findById(id).get();
-            reservationService.deleteReservation(table.getReservation().getId());
+            reservationService.deleteReservation(table.getReservationId().getId());
             tablesRepository.deleteById(id);
 
         } catch (ItemNotFoundException e) {
