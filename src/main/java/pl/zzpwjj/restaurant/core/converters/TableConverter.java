@@ -1,19 +1,21 @@
 package pl.zzpwjj.restaurant.core.converters;
 
 
+import org.springframework.stereotype.Component;
 import pl.zzpwjj.restaurant.core.model.dto.TableDto;
 import pl.zzpwjj.restaurant.core.model.entities.Table;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class TableConverter {
 
     public TableDto convertTable(Table table)
     {
         TableDto tableDto = new TableDto();
         tableDto.setId(table.getId());
-        tableDto.setReservationId(table.getReservation());
+        tableDto.setReservationId(table.getReservationId());
         return tableDto;
     }
 

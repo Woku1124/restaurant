@@ -15,15 +15,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddReservationInput{
-        @NotNull
-        private Long id;
 
         @NotNull
         private LocalDateTime reservationDateTime;
 
         @NotNull
-        private PersonalData clientPersonalDataId;
+        private AddPersonalDataInput clientPersonalDataId;
 
         @NotNull
-        private Address addressId;
+        private AddAddressInput addressId;
 }

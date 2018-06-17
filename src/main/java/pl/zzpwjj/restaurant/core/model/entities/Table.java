@@ -16,5 +16,5 @@ public class Table {
 
     @OneToOne
     @JoinColumn(name = "reservations")
-    private Reservation reservation;
+    private Reservation reservationId;
 }
