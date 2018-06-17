@@ -31,4 +31,15 @@ public class EmailSenderService {
         emailSender.sendEmail(userEmail, "Rezerwacja", body);
 
     }
+
+    public void send(String to, String title, String content) throws MessagingException {
+        Context context = new Context();
+        context.setVariable("header", "");
+        context.setVariable("title", title);
+        context.setVariable("description", content);
+
+        String body = templateEngine.process("template", context);
+        emailSender.sendEmail(to, title, body);
+
+    }
 }
