@@ -30,6 +30,10 @@ public class RatingsService {
         return ratingsRepository.findAllByDish_Id(id);
     }
 
+    public List<Rating> getRatingsWithDishNameEqualsTo(final String name) {
+        return ratingsRepository.findAllByDish_Name(name);
+    }
+
     public Rating getRating(final Long id) throws ItemNotFoundException {
         return ratingsRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }

@@ -42,6 +42,14 @@ public class DishEndpoint {
         return new ResponseEntity<>(dishDtos, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Returns all dishes with type name equals to")
+    @GetMapping("/getDishesWithTypeNameEqualsTo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<DishDto>> getDishesWithTypeNameEqualsTo(@RequestParam("name") @NotNull final String name) {
+        List<DishDto> dishDtos = dishesConverter.convertDishes(dishesService.getDishesWithTypeNameEqualsTo(name));
+        return new ResponseEntity<>(dishDtos, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Returns dish")
     @GetMapping("/getDish")
     @Produces(MediaType.APPLICATION_JSON)

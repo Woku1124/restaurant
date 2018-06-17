@@ -32,6 +32,14 @@ public class DishesService {
         return dishesRepository.findAll();
     }
 
+    public List<Dish> getDishesWithTypeNameEqualsTo(String name) {
+        return dishesRepository.findAllByDishType_Name(name);
+    }
+
+    public List<Dish> getDishesWithTypeIdEqualsTo(Long id) {
+        return dishesRepository.findAllByDishType_Id(id);
+    }
+
     public Dish getDish(final Long id) throws ItemNotFoundException {
         return dishesRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }

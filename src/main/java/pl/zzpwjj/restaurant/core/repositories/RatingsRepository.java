@@ -12,7 +12,9 @@ import java.util.List;
 @Repository
 public interface RatingsRepository extends JpaRepository<Rating, Long> {
 
-    List<Rating> findAllByDish_Id(Long Dish);
+    List<Rating> findAllByDish_Id(Long dish);
+
+    List<Rating> findAllByDish_Name(String name);
 
     List<Rating> findAllByMark(Integer mark);
 

@@ -16,5 +16,5 @@ public class DishTypeDto {
     private Long id;
 
     @NotNull
-    private String Name;
+    private String name;
 }
