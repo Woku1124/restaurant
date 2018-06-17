@@ -22,11 +22,15 @@ public class RatingsService {
         this.ratingsRepository = ratingsRepository;
     }
 
-    public List<Rating> geRatings() {
+    public List<Rating> getRatings() {
         return ratingsRepository.findAll();
     }
 
-    public Rating geRating(final Long id) throws ItemNotFoundException {
+    public List<Rating> getRatingsWithDishIdEqualsTo(final Long id) {
+        return ratingsRepository.findAllWhereDishIdIsEqualTo(id);
+    }
+
+    public Rating getRating(final Long id) throws ItemNotFoundException {
         return ratingsRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 

@@ -38,7 +38,15 @@ public class RatingsEndpoint {
     @GetMapping("/getRatings")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<RatingDto>> getRatings() {
-        List<RatingDto> ratingDtos = ratingsConverter.convertRatings(ratingsService.geRatings());
+        List<RatingDto> ratingDtos = ratingsConverter.convertRatings(ratingsService.getRatings());
+        return new ResponseEntity<>(ratingDtos, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Returns all ratings with dish id equals to")
+    @GetMapping("/getRatingswithDishIdEqualsTo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<RatingDto>> getRatingswithDishIdEqualsTo(@RequestParam("dishId") @NotNull final Long Id) {
+        List<RatingDto> ratingDtos = ratingsConverter.convertRatings(ratingsService.getRatingsWithDishIdEqualsTo(Id));
         return new ResponseEntity<>(ratingDtos, HttpStatus.OK);
     }
 
@@ -48,7 +56,7 @@ public class RatingsEndpoint {
     public ResponseEntity<RatingDto> getRating(@RequestParam("id") @NotNull final Long id) {
         RatingDto ratingDto;
         try {
-            ratingDto = ratingsConverter.convertRating(ratingsService.geRating(id));
+            ratingDto = ratingsConverter.convertRating(ratingsService.getRating(id));
         } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

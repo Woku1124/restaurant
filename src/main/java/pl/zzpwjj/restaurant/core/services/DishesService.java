@@ -7,18 +7,22 @@ import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.model.dto.DishDto;
 import pl.zzpwjj.restaurant.core.model.entities.Dish;
+import pl.zzpwjj.restaurant.core.model.entities.Rating;
 import pl.zzpwjj.restaurant.core.model.inputs.AddDishInput;
 import pl.zzpwjj.restaurant.core.repositories.DishesRepository;
+import pl.zzpwjj.restaurant.core.repositories.RatingsRepository;
 
 import java.util.List;
 
 @Service
 public class DishesService {
     private DishesRepository dishesRepository;
+    private RatingsService ratingsService;
 
     @Autowired
-    public DishesService(final DishesRepository dishesRepository) {
+    public DishesService(final DishesRepository dishesRepository, final RatingsService ratingsService) {
         this.dishesRepository = dishesRepository;
+        this.ratingsService = ratingsService;
     }
 
     public List<Dish> getDishes() {
@@ -41,6 +45,10 @@ public class DishesService {
 
     public void deleteDish(final Long id) throws ItemNotFoundException {
         try {
+            List<Rating> ratings = ratingsService.getRatingsWithDishIdEqualsTo(id);
+            for(int i = 0; i < ratings.size(); i++){
+                ratingsService.deleteRating(ratings.get(i).getId());
+            }
             dishesRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ItemNotFoundException("Dish with id = " + id + " does not exist", e);
