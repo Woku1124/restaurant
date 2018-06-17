@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core;
+package pl.zzpwjj.restaurant.core.foodOrders.validators;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 @Service
-abstract public class ValidatorBase<T> {
+abstract class ValidatorBase<T> {
 
     abstract public void validate(final T t) throws InvalidParametersException;
 
@@ -27,20 +27,6 @@ abstract public class ValidatorBase<T> {
         // sprawdza czy nazwa zawiera tylko litery
         if(!data.chars().allMatch(Character::isLetter)){
             error += dataName + " error - shouldn't contain other signs than letters\n";
-        }
-        return error;
-    }
-
-    protected String validateDescription(final String data, final String dataName) {
-        String error = "";
-        // sprawdza czy pierwszy znak nazwy jest wielka litera
-        if (!StringUtils.isAllUpperCase(data.substring(0,1))) {
-            error += dataName + " error - first sign can't be lower case\n";
-        }
-
-        // sprawdza czy nazwa zawiera tylko litery lub białe znaki
-        if(!data.chars().allMatch(Character::isLetter) && !data.chars().allMatch(Character::isWhitespace)){
-            error += dataName + " error - shouldn't contain other signs than letters or white spaces\n";
         }
         return error;
     }
