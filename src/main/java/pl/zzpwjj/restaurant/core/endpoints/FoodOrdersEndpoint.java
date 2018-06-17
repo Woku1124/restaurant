@@ -64,6 +64,14 @@ public class FoodOrdersEndpoint {
         return new ResponseEntity<>(foodOrderDto, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Returns not realized food orders")
+    @GetMapping("/getNotRealizedFoodOrders")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<FoodOrderDto>> getNotRealizedFoodOrders() {
+        List<FoodOrderDto> foodOrderDtos = foodOrdersConverter.convertFoodOrders(foodOrdersService.getNotRealizedFoodOrders());
+        return new ResponseEntity<>(foodOrderDtos, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Adds food order")
     @PostMapping("/addFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)

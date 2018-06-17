@@ -38,6 +38,11 @@ public class FoodOrdersService {
         return foodOrdersRepository.findAll();
     }
 
+    public List<FoodOrder> getNotRealizedFoodOrders() {
+        return foodOrdersRepository.findAll();
+    }
+
+
     public FoodOrder getFoodOrder(final Long id) throws ItemNotFoundException {
         return foodOrdersRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
@@ -56,6 +61,10 @@ public class FoodOrdersService {
                 throw new ItemNotFoundException("Dish with name = " + dishName + " does not exist", e);
             }
         }
+
+
+
+
         foodOrder.setFull_price(fullPrice);
 
         foodOrdersRepository.save(foodOrder);
@@ -103,4 +112,5 @@ public class FoodOrdersService {
         foodOrder.setDate_of_realization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
     }
+
 }
