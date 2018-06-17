@@ -35,7 +35,6 @@ public class EmployeesService {
         employee.setPesel(addEmployeeInput.getPesel());
         employee.setPosition(addEmployeeInput.getPosition());
         employee.setSalary(addEmployeeInput.getSalary());
-
         return employeesRepository.save(employee);
     }
 
@@ -61,6 +60,7 @@ public class EmployeesService {
         employee.setSalary(employeeDto.getSalary());
 
         return employeesRepository.save(employee);
+
     }
 
     public Double getSumOfSalaries() {

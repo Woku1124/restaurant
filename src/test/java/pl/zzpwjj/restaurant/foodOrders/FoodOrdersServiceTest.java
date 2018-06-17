@@ -1,5 +1,6 @@
 package pl.zzpwjj.restaurant.foodOrders;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,4 +17,8 @@ public class FoodOrdersServiceTest {
     @Mock
     private FoodOrdersRepository foodOrdersRepository;
 
+    @Test
+    public void nieWrzucamyNieBudujacegoSieKodu() {
+
+    }
 }

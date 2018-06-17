@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.employees.model.dto.EmployeeDto;
 import pl.zzpwjj.restaurant.core.employees.model.entities.Employee;
@@ -28,12 +29,12 @@ public class EmployeesTests {
     private EmployeesRepository employeesRepository;
 
     @Test
-    public void shouldCreateEmployee() {
+    public void shouldCreateEmployee() throws InvalidParametersException {
         // given
         AddEmployeeInput employee = new AddEmployeeInput();
         employee.setFirstName("firstName");
         employee.setLastName("lastName");
-        employee.setPesel("pesel");
+        employee.setPesel("55555555555");
         employee.setPosition("pos");
         employee.setSalary(0.0);
 
@@ -76,13 +77,13 @@ public class EmployeesTests {
     }
 
     @Test
-    public void shouldUpdateEmployee() throws ItemNotFoundException {
+    public void shouldUpdateEmployee() throws ItemNotFoundException, InvalidParametersException {
         // given
         EmployeeDto employee = new EmployeeDto();
         employee.setId(1L);
         employee.setFirstName("firstName");
         employee.setLastName("lastName");
-        employee.setPesel("pesel");
+        employee.setPesel("55555555555");
         employee.setPosition("pos");
         employee.setSalary(0.0);
 
@@ -100,13 +101,13 @@ public class EmployeesTests {
     }
 
     @Test(expected = ItemNotFoundException.class)
-    public void shouldNotUpdateEmployeeButThrowItemNotFoundException() throws ItemNotFoundException {
+    public void shouldNotUpdateEmployeeButThrowItemNotFoundException() throws ItemNotFoundException, InvalidParametersException {
         // given
         EmployeeDto employee = new EmployeeDto();
         employee.setId(1L);
         employee.setFirstName("firstName");
         employee.setLastName("lastName");
-        employee.setPesel("pesel");
+        employee.setPesel("55555555555");
         employee.setPosition("pos");
         employee.setSalary(0.0);
 

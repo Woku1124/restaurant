@@ -11,7 +11,6 @@ import pl.zzpwjj.restaurant.core.employees.converters.EmployeesConverter;
 import pl.zzpwjj.restaurant.core.employees.model.dto.EmployeeDto;
 import pl.zzpwjj.restaurant.core.employees.model.inputs.AddEmployeeInput;
 import pl.zzpwjj.restaurant.core.employees.services.EmployeesService;
-import pl.zzpwjj.restaurant.core.employees.validators.EmployeesValidator;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -27,14 +26,11 @@ public class EmployeesEndpoint {
 
     private EmployeesService employeesService;
     private EmployeesConverter employeesConverter;
-    private EmployeesValidator employeesValidator;
 
     @Autowired
-    public EmployeesEndpoint(final EmployeesService employeesService, final EmployeesConverter employeesConverter,
-                             final EmployeesValidator employeesValidator) {
+    public EmployeesEndpoint(final EmployeesService employeesService, final EmployeesConverter employeesConverter) {
         this.employeesService = employeesService;
         this.employeesConverter = employeesConverter;
-        this.employeesValidator = employeesValidator;
     }
 
     @ApiOperation(value = "Returns all employees")
