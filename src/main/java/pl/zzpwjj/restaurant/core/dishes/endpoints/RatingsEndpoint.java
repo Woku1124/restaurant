@@ -12,7 +12,9 @@ import pl.zzpwjj.restaurant.core.dishes.converters.RatingsConverter;
 import pl.zzpwjj.restaurant.core.dishes.model.dto.RatingDto;
 import pl.zzpwjj.restaurant.core.dishes.model.input.AddRatingInput;
 import pl.zzpwjj.restaurant.core.dishes.services.RatingsService;
+import pl.zzpwjj.restaurant.core.dishes.validators.RatingValidator;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -27,11 +29,13 @@ public class RatingsEndpoint {
 
     private RatingsService ratingsService;
     private RatingsConverter ratingsConverter;
+    private RatingValidator ratingValidator;
 
     @Autowired
-    public RatingsEndpoint(final RatingsService ratingsService, final RatingsConverter ratingsConverter) {
+    public RatingsEndpoint(final RatingsService ratingsService, final RatingsConverter ratingsConverter, final RatingValidator ratingValidator) {
         this.ratingsService = ratingsService;
         this.ratingsConverter = ratingsConverter;
+        this.ratingValidator = ratingValidator;
     }
 
     @ApiOperation(value = "Returns all ratings")
@@ -66,7 +70,8 @@ public class RatingsEndpoint {
     @ApiOperation(value = "Adds rating")
     @PostMapping("/addRating")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> addRating(@RequestBody @Valid final AddRatingInput addRatingInput) {
+    public ResponseEntity<Void> addRating(@RequestBody @Valid final AddRatingInput addRatingInput) throws ItemNotFoundException, MessagingException, InvalidParametersException{
+        ratingValidator.validate(addRatingInput);
         ratingsService.addRating(addRatingInput);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

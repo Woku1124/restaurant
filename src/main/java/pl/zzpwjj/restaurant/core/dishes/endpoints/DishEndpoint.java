@@ -12,7 +12,9 @@ import pl.zzpwjj.restaurant.core.dishes.converters.DishesConverter;
 import pl.zzpwjj.restaurant.core.dishes.model.dto.DishDto;
 import pl.zzpwjj.restaurant.core.dishes.model.input.AddDishInput;
 import pl.zzpwjj.restaurant.core.dishes.services.DishesService;
+import pl.zzpwjj.restaurant.core.dishes.validators.DishValidator;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -27,11 +29,13 @@ public class DishEndpoint {
 
     private DishesService dishesService;
     private DishesConverter dishesConverter;
+    private DishValidator dishValidator;
 
     @Autowired
-    public DishEndpoint(final DishesService dishesService, final DishesConverter dishesConverter) {
+    public DishEndpoint(final DishesService dishesService, final DishesConverter dishesConverter, final DishValidator dishValidator) {
         this.dishesService = dishesService;
         this.dishesConverter = dishesConverter;
+        this.dishValidator = dishValidator;
     }
 
     @ApiOperation(value = "Returns all dishes")
@@ -74,7 +78,8 @@ public class DishEndpoint {
     @ApiOperation(value = "Adds dishName")
     @PostMapping("/addDish")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> addDish(@RequestBody @Valid final AddDishInput addDishInput) {
+    public ResponseEntity<Void> addDish(@RequestBody @Valid final AddDishInput addDishInput) throws ItemNotFoundException, MessagingException, InvalidParametersException{
+        dishValidator.validate(addDishInput);
         dishesService.addDish(addDishInput);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
