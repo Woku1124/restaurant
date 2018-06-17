@@ -1,11 +1,8 @@
-package pl.zzpwjj.restaurant.core.repositories;
+package pl.zzpwjj.restaurant.core.dishes.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
-import pl.zzpwjj.restaurant.core.model.entities.Rating;
+import pl.zzpwjj.restaurant.core.dishes.model.entities.Rating;
 
 import java.util.List;
 
@@ -21,5 +18,7 @@ public interface RatingsRepository extends JpaRepository<Rating, Long> {
     List<Rating> findAllByMarkGreaterThan(Integer mark);
 
     List<Rating> findAllByMarkLessThan(Integer mark);
+
+
 
 }

@@ -1,15 +1,17 @@
-package pl.zzpwjj.restaurant.core.services;
+package pl.zzpwjj.restaurant.core.dishes.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.dto.DishDto;
-import pl.zzpwjj.restaurant.core.model.entities.Dish;
-import pl.zzpwjj.restaurant.core.model.entities.Rating;
-import pl.zzpwjj.restaurant.core.model.inputs.AddDishInput;
-import pl.zzpwjj.restaurant.core.repositories.DishesRepository;
+import pl.zzpwjj.restaurant.core.foodOrders.services.DishFoodOrdersService;
+import pl.zzpwjj.restaurant.core.dishes.model.dto.DishDto;
+import pl.zzpwjj.restaurant.core.dishes.model.entities.Dish;
+import pl.zzpwjj.restaurant.core.dishes.model.entities.Rating;
+import pl.zzpwjj.restaurant.core.dishes.model.input.AddDishInput;
+import pl.zzpwjj.restaurant.core.dishes.repositories.DishesRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +21,15 @@ public class DishesService {
     private DishesRepository dishesRepository;
     private RatingsService ratingsService;
     private DishFoodOrdersService dishFoodOrdersService;
+    private DishTypesServices dishTypesServices;
 
     @Autowired
     public DishesService(final DishesRepository dishesRepository, final RatingsService ratingsService,
-                         final DishFoodOrdersService dishFoodOrdersService) {
+                         final DishFoodOrdersService dishFoodOrdersService, @Lazy final DishTypesServices dishTypesServices) {
         this.dishesRepository = dishesRepository;
         this.ratingsService = ratingsService;
         this.dishFoodOrdersService = dishFoodOrdersService;
+        this.dishTypesServices = dishTypesServices;
     }
 
     public List<Dish> getDishes() {
@@ -46,7 +50,7 @@ public class DishesService {
 
     public void addDish(final AddDishInput addDishInput) {
         Dish dish = new Dish();
-        dish.setDishType(addDishInput.getDishType());
+        dish.setDishType(dishTypesServices.getDishTypeByName(addDishInput.getDishTypeInput().getName()));
         dish.setPrice(addDishInput.getPrice());
         dish.setName(addDishInput.getName());
         dish.setDescription(addDishInput.getDescription());

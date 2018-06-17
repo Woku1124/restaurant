@@ -1,11 +1,9 @@
-package pl.zzpwjj.restaurant.core.foodOrders.model.dto;
+package pl.zzpwjj.restaurant.core.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.zzpwjj.restaurant.core.dishes.model.entities.Dish;
-import pl.zzpwjj.restaurant.core.foodOrders.model.entities.FoodOrder;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,14 +11,24 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DishFoodOrderDto {
-
+public class AddressDto {
     @NotNull
     private Long id;
 
     @NotNull
-    private FoodOrder foodOrder;
+    private Long phone_nr;
 
     @NotNull
-    private Dish dish;
+    private String email;
+
+    @NotNull
+    private String city;
+
+    @NotNull
+    private String street;
+
+    @NotNull
+    private int homeNr;
+
+    private int flatNr;
 }
