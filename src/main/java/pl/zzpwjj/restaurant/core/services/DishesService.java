@@ -11,17 +11,21 @@ import pl.zzpwjj.restaurant.core.model.entities.Rating;
 import pl.zzpwjj.restaurant.core.model.inputs.AddDishInput;
 import pl.zzpwjj.restaurant.core.repositories.DishesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DishesService {
     private DishesRepository dishesRepository;
     private RatingsService ratingsService;
+    private DishFoodOrdersService dishFoodOrdersService;
 
     @Autowired
-    public DishesService(final DishesRepository dishesRepository, final RatingsService ratingsService) {
+    public DishesService(final DishesRepository dishesRepository, final RatingsService ratingsService,
+                         final DishFoodOrdersService dishFoodOrdersService) {
         this.dishesRepository = dishesRepository;
         this.ratingsService = ratingsService;
+        this.dishFoodOrdersService = dishFoodOrdersService;
     }
 
     public List<Dish> getDishes() {
@@ -71,5 +75,13 @@ public class DishesService {
 
     public Dish getDishByName(final String name) throws ItemNotFoundException {
         return dishesRepository.findByName(name);
+    }
+
+    public List<Dish> getMostOrderedDish(){
+        List <Dish> mostOrderedDish = new ArrayList<>();
+        for(Long id : dishFoodOrdersService.getMostOrderedDishId()){
+            mostOrderedDish.add(dishesRepository.findById(id).get());
+        }
+        return mostOrderedDish;
     }
 }

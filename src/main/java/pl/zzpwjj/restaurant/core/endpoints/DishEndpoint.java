@@ -55,6 +55,14 @@ public class DishEndpoint {
         return new ResponseEntity<>(dishDto, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Returns most ordered dish/dishes")
+    @GetMapping("/getMostOrderedDish")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<DishDto>> getMostOrderedDish() {
+        List<DishDto> dishDtos = dishesConverter.convertDishes(dishesService.getMostOrderedDish());
+        return new ResponseEntity<>(dishDtos, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Adds dish")
     @PostMapping("/addDish")
     @Consumes(MediaType.APPLICATION_JSON)

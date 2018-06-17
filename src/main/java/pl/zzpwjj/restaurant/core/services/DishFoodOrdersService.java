@@ -65,4 +65,8 @@ public class DishFoodOrdersService {
 
         dishFoodOrderRepository.save(dishFoodOrder);
     }
+
+    public List<Long> getMostOrderedDishId(){
+        return dishFoodOrderRepository.findMostOrderedDishId();
+    }
 }
