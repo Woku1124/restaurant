@@ -19,7 +19,7 @@ public class RatingDto {
     private Long id;
 
     @NotNull
-    private Dish dish_id;
+    private Dish dish;
 
     @NotNull
     @Min(1)

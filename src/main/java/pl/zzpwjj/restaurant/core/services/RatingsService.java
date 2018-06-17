@@ -36,7 +36,7 @@ public class RatingsService {
 
     public Rating addRating(final AddRatingInput addRatingInput) {
         Rating rating = new Rating();
-        rating.setDish_id(addRatingInput.getDish_id());
+        rating.setDish(addRatingInput.getDish());
         rating.setMark(addRatingInput.getMark());
         rating.setComment(addRatingInput.getComment());
 
@@ -58,7 +58,7 @@ public class RatingsService {
 
         Rating rating = new Rating();
         rating.setId(ratingDto.getId());
-        rating.setDish_id(ratingDto.getDish_id());
+        rating.setDish(ratingDto.getDish());
         rating.setMark(ratingDto.getMark());
         rating.setComment(ratingDto.getComment());
 

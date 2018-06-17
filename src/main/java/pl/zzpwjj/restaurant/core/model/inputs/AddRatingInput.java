@@ -17,7 +17,7 @@ package pl.zzpwjj.restaurant.core.model.inputs;
 public class AddRatingInput {
 
     @NotNull
-    private Dish dish_id;
+    private Dish dish;
 
     @NotNull
     @Min(1)

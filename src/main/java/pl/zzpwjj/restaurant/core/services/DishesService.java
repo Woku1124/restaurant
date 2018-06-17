@@ -10,7 +10,6 @@ import pl.zzpwjj.restaurant.core.model.entities.Dish;
 import pl.zzpwjj.restaurant.core.model.entities.Rating;
 import pl.zzpwjj.restaurant.core.model.inputs.AddDishInput;
 import pl.zzpwjj.restaurant.core.repositories.DishesRepository;
-import pl.zzpwjj.restaurant.core.repositories.RatingsRepository;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class DishesService {
 
     public void addDish(final AddDishInput addDishInput) {
         Dish dish = new Dish();
-        dish.setDish_type_id(addDishInput.getDish_type_id());
+        dish.setDish_type(addDishInput.getDish_type());
         dish.setPrice(addDishInput.getPrice());
         dish.setName(addDishInput.getName());
         dish.setDescription(addDishInput.getDescription());
@@ -62,7 +61,7 @@ public class DishesService {
 
         Dish dish = new Dish();
         dish.setId(dishDto.getId());
-        dish.setDish_type_id(dishDto.getDish_type_id());
+        dish.setDish_type(dishDto.getDish_type());
         dish.setPrice(dishDto.getPrice());
         dish.setName(dishDto.getName());
         dish.setDescription(dishDto.getDescription());

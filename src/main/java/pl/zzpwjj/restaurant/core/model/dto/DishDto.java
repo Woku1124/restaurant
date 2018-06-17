@@ -17,7 +17,7 @@ public class DishDto {
     private Long id;
 
     @NotNull
-    private DishType dish_type_id;
+    private DishType dish_type;
 
     @NotNull
     private Double price;
