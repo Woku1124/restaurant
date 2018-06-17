@@ -8,15 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.zzpwjj.restaurant.common.exceptions.DataSourceException;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
+import pl.zzpwjj.restaurant.core.foodOrders.services.AddressesService;
+import pl.zzpwjj.restaurant.core.foodOrders.services.PersonalDatasService;
 import pl.zzpwjj.restaurant.core.reservations.converters.ReservationConverter;
 import pl.zzpwjj.restaurant.core.reservations.model.dto.ReservationDto;
 import pl.zzpwjj.restaurant.core.reservations.model.entities.Reservation;
 import pl.zzpwjj.restaurant.core.tables.model.entities.Table;
 import pl.zzpwjj.restaurant.core.reservations.model.inputs.AddReservationInput;
 import pl.zzpwjj.restaurant.core.reservations.repositories.ReservationRepository;
-import pl.zzpwjj.restaurant.core.services.AddressesService;
 import pl.zzpwjj.restaurant.core.services.EmailSenderService;
-import pl.zzpwjj.restaurant.core.services.PersonalDatasService;
 import pl.zzpwjj.restaurant.core.tables.services.TablesService;
 
 import javax.mail.MessagingException;
