@@ -11,6 +11,8 @@ import pl.zzpwjj.restaurant.core.employees.model.inputs.AddEmployeeInput;
 import pl.zzpwjj.restaurant.core.employees.repositories.EmployeesRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 @Service
 public class EmployeesService {
@@ -30,7 +32,7 @@ public class EmployeesService {
         return employeesRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addEmployee(final AddEmployeeInput addEmployeeInput) {
+    public Employee addEmployee(final AddEmployeeInput addEmployeeInput) {
         Employee employee = new Employee();
         employee.setFirstName(addEmployeeInput.getFirstName());
         employee.setLastName(addEmployeeInput.getLastName());
@@ -38,20 +40,20 @@ public class EmployeesService {
         employee.setPosition(addEmployeeInput.getPosition());
         employee.setSalary(addEmployeeInput.getSalary());
 
-        employeesRepository.save(employee);
+        return employeesRepository.save(employee);
     }
 
     public void deleteEmployee(final Long id) throws ItemNotFoundException {
-        try {
-            employeesRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("Employee with id = " + id + " not exist", e);
+        if (!employeesRepository.existsById(id)) {
+            throw new ItemNotFoundException("Employee with id = " + id + " not exist");
         }
+
+        employeesRepository.deleteById(id);
     }
 
-    public void editEmployee(final EmployeeDto employeeDto) throws InvalidParametersException {
+    public Employee editEmployee(final EmployeeDto employeeDto) throws ItemNotFoundException {
         if (!employeesRepository.existsById(employeeDto.getId())) {
-            throw new InvalidParametersException("Employee with id = " + employeeDto.getId() + " not exist");
+            throw new ItemNotFoundException("Employee with id = " + employeeDto.getId() + " not exist");
         }
 
         Employee employee = new Employee();
@@ -62,6 +64,10 @@ public class EmployeesService {
         employee.setPosition(employeeDto.getPosition());
         employee.setSalary(employeeDto.getSalary());
 
-        employeesRepository.save(employee);
+        return employeesRepository.save(employee);
+    }
+
+    public Double getSumOfSalaries() {
+        return employeesRepository.findAll().stream().mapToDouble(Employee::getSalary).sum();
     }
 }

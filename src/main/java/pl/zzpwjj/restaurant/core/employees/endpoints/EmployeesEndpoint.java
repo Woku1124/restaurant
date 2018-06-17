@@ -84,9 +84,17 @@ public class EmployeesEndpoint {
     public ResponseEntity<Void> editEmployee(@RequestBody @Valid final EmployeeDto employeeDto) {
         try {
             employeesService.editEmployee(employeeDto);
-        } catch (InvalidParametersException e) {
+        } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Returns sum of salaries")
+    @GetMapping("/getSumOfSalaries")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<Double> getSumOfSalaries() {
+        Double sumOfSalaries = employeesService.getSumOfSalaries();
+        return new ResponseEntity<>(sumOfSalaries, HttpStatus.OK);
     }
 }
