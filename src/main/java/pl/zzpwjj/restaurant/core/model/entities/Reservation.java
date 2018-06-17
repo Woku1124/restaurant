@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity(name = "tasks")
+@Entity(name = "reservations")
 public class Reservation {
     @Id
     @GeneratedValue

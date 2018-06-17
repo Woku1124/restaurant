@@ -17,7 +17,16 @@ public class ReservationConverter {
         return reservationDto;
     }
 
-    public List<ReservationDto> convertFoodOrders(final List<Reservation> foodOrders) {
-        return foodOrders.stream().map(this::convertReservation).collect(Collectors.toList());
+    public Reservation convertToReservationFromDto(final ReservationDto reservationDto){
+        Reservation reservation = new Reservation();
+        reservation.setId(reservationDto.getId());
+        reservation.setClientPersonalDataId(reservationDto.getClientPersonalDataId());
+        reservation.setReservationDateTime(reservationDto.getReservationDateTime());
+        reservation.setAddressId(reservationDto.getAddressId());
+        return reservation;
+    }
+
+    public List<ReservationDto> convertReservations(final List<Reservation> reservations) {
+        return reservations.stream().map(this::convertReservation).collect(Collectors.toList());
     }
 }
