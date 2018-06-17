@@ -12,7 +12,12 @@ import java.util.List;
 @Repository
 public interface RatingsRepository extends JpaRepository<Rating, Long> {
 
-   @Query("SELECT r FROM rating r WHERE r.dish = :dishId")
-    List<Rating> findAllWhereDishIdIsEqualTo(@Param("dishId") Long id);
+    List<Rating> findAllByDish_Id(Long Dish);
+
+    List<Rating> findAllByMark(Integer mark);
+
+    List<Rating> findAllByMarkGreaterThan(Integer mark);
+
+    List<Rating> findAllByMarkLessThan(Integer mark);
 
 }

@@ -27,7 +27,7 @@ public class RatingsService {
     }
 
     public List<Rating> getRatingsWithDishIdEqualsTo(final Long id) {
-        return ratingsRepository.findAllWhereDishIdIsEqualTo(id);
+        return ratingsRepository.findAllByDish_Id(id);
     }
 
     public Rating getRating(final Long id) throws ItemNotFoundException {
