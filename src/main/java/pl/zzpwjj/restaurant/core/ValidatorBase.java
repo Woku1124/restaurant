@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.foodOrders.validators;
+package pl.zzpwjj.restaurant.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 @Service
-abstract class ValidatorBase<T> {
+abstract public class ValidatorBase<T> {
 
     abstract public void validate(final T t) throws InvalidParametersException;
 
