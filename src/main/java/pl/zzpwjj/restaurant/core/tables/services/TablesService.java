@@ -1,14 +1,14 @@
-package pl.zzpwjj.restaurant.core.services;
+package pl.zzpwjj.restaurant.core.tables.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import pl.zzpwjj.restaurant.common.exceptions.DataSourceException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.entities.Reservation;
-import pl.zzpwjj.restaurant.core.model.entities.Table;
-import pl.zzpwjj.restaurant.core.model.inputs.AddTableInput;
-import pl.zzpwjj.restaurant.core.repositories.TablesRepository;
+import pl.zzpwjj.restaurant.core.reservations.model.entities.Reservation;
+import pl.zzpwjj.restaurant.core.tables.model.entities.Table;
+import pl.zzpwjj.restaurant.core.tables.model.inputs.AddTableInput;
+import pl.zzpwjj.restaurant.core.tables.repositories.TablesRepository;
+import pl.zzpwjj.restaurant.core.reservations.services.ReservationService;
 
 import java.util.List;
 import java.util.stream.Collectors;
