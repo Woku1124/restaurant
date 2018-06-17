@@ -13,6 +13,7 @@ public class RatingsConverter {
     public RatingDto convertRating(final Rating rating) {
         RatingDto ratingDto = new RatingDto();
         ratingDto.setId(rating.getId());
+        ratingDto.setDish_id(rating.getDish_id());
         ratingDto.setMark(rating.getMark());
         ratingDto.setComment(rating.getComment());
         return ratingDto;

@@ -4,6 +4,7 @@ package pl.zzpwjj.restaurant.core.model.inputs;
         import lombok.Getter;
         import lombok.NoArgsConstructor;
         import lombok.Setter;
+        import pl.zzpwjj.restaurant.core.model.entities.Dish;
 
         import javax.validation.constraints.Max;
         import javax.validation.constraints.Min;
@@ -14,6 +15,10 @@ package pl.zzpwjj.restaurant.core.model.inputs;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddRatingInput {
+
+    @NotNull
+    private Dish dish_id;
+
     @NotNull
     @Min(1)
     @Max(5)
