@@ -37,19 +37,19 @@ public class DishFoodOrdersService {
     }
 
     public void deleteDishFoodOrder(final Long id) throws ItemNotFoundException {
-        try {
-            dishFoodOrderRepository.deleteAllById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist", e);
+        if (!dishFoodOrderRepository.existsById(id)) {
+            throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist");
         }
+
+        dishFoodOrderRepository.deleteById(id);
     }
 
     public void deleteDishFoodOrdersByFoodOrderId(final Long id) throws ItemNotFoundException {
-        try {
-            dishFoodOrderRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist", e);
+        if (!dishFoodOrderRepository.existsById(id)) {
+            throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist");
         }
+
+        dishFoodOrderRepository.deleteById(id);
     }
 
 

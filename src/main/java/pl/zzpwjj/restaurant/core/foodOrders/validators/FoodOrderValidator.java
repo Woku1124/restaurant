@@ -1,6 +1,5 @@
 package pl.zzpwjj.restaurant.core.foodOrders.validators;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.core.ValidatorBase;

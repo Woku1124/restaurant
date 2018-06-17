@@ -25,7 +25,6 @@ public class FoodOrder {
     private Address address;
 
     @NotNull
-    @Range(min = 0, message = "Please select positive numbers only")
     private Double full_price;
 
     @NotNull

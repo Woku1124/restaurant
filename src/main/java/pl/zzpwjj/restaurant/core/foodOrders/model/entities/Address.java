@@ -22,18 +22,12 @@ public class Address {
     private Long phoneNr;
 
     @NotNull
-    @Size(min=1, message="City should have atleast 2 characters")
-    @Size(max=20, message="City shouldn't have more than 20 characters")
     private String email;
 
     @NotNull
-    @Size(min=1, message="City should have atleast 2 characters")
-    @Size(max=20, message="City shouldn't have more than 20 characters")
     private String city;
 
     @NotNull
-    @Size(min=1, message="Street should have atleast 2 characters")
-    @Size(max=20, message="Street shouldn't have more than 20 characters")
     private String street;
 
     @NotNull

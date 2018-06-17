@@ -46,17 +46,16 @@ public class AddressesService {
     }
 
     public void deleteAddress(final Long id) throws ItemNotFoundException {
-        try {
-            addressesRepository.deleteById(id);
+        if (!addressesRepository.existsById(id)) {
+            throw new ItemNotFoundException("Address with id = " + id + " does not exist");
         }
-        catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("Address with id = " + id + " does not exist", e);
-        }
+
+        addressesRepository.deleteById(id);
     }
 
-    public void editAddress(final AddressDto addressDto) throws InvalidParametersException {
+    public Address editAddress(final AddressDto addressDto) throws ItemNotFoundException {
         if (!addressesRepository.existsById(addressDto.getId())) {
-            throw new InvalidParametersException("Address with id = " + addressDto.getId() + " does not exist");
+            throw new ItemNotFoundException("Address with id = " + addressDto.getId() + " does not exist");
         }
 
         Address address = new Address();
@@ -68,6 +67,6 @@ public class AddressesService {
         address.setHomeNr(addressDto.getHomeNr());
         address.setFlatNr(addressDto.getFlatNr());
 
-        addressesRepository.save(address);
+        return addressesRepository.save(address);
     }
 }

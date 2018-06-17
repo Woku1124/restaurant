@@ -54,7 +54,7 @@ public class FoodOrdersService {
         return foodOrdersRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput)
+    public FoodOrder addFoodOrder(final AddFoodOrderInput addFoodOrderInput)
             throws ItemNotFoundException, MessagingException {
         FoodOrder foodOrder = new FoodOrder();
         Double fullPrice = 0d;
@@ -72,7 +72,7 @@ public class FoodOrdersService {
 
         foodOrder.setFull_price(fullPrice);
 
-        foodOrdersRepository.save(foodOrder);
+        FoodOrder order = foodOrdersRepository.save(foodOrder);
 
         for(String dishName : addFoodOrderInput.getDishNames()) {
             AddDishFoodOrderInput dishFoodOrder = new AddDishFoodOrderInput();
@@ -87,7 +87,7 @@ public class FoodOrdersService {
         catch(MessagingException e){
             throw new MessagingException("Couldn't send email to " + foodOrder.getAddress().getEmail(), e);
         }
-
+        return order;
     }
 
     public void deleteFoodOrder(final Long id) throws ItemNotFoundException {
@@ -103,7 +103,7 @@ public class FoodOrdersService {
         }
     }
 
-    public void editFoodOrder(final FoodOrderDto foodOrderDto) throws InvalidParametersException {
+    public FoodOrder editFoodOrder(final FoodOrderDto foodOrderDto) throws InvalidParametersException {
         if (!foodOrdersRepository.existsById(foodOrderDto.getId())) {
             throw new InvalidParametersException("Food order with id = " + foodOrderDto.getId() + " does not exist");
         }
@@ -115,7 +115,7 @@ public class FoodOrdersService {
         foodOrder.setDateOfRealization(foodOrderDto.getDateOfRealization());
         foodOrder.setFull_price(foodOrderDto.getFull_price());
 
-        foodOrdersRepository.save(foodOrder);
+        return foodOrdersRepository.save(foodOrder);
     }
 
     public void realizeFoodOrder(final Long id) throws ItemNotFoundException, MessagingException {

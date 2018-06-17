@@ -31,25 +31,26 @@ public class PersonalDatasService {
     }
 
     public PersonalData addPersonalData(final AddPersonalDataInput addPersonalDataInput) {
+        //create object
         PersonalData personalData = new PersonalData();
         personalData.setName(addPersonalDataInput.getName());
         personalData.setSurname(addPersonalDataInput.getSurname());
 
+        //save
         return personalDatasRepository.save(personalData);
     }
 
     public void deletePersonalData(final Long id) throws ItemNotFoundException {
-        try {
-            personalDatasRepository.deleteById(id);
+        if (!personalDatasRepository.existsById(id)) {
+            throw new ItemNotFoundException("Personal data with id = " + id + " does not exist");
         }
-        catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("Personal data with id = " + id + " does not exist", e);
-        }
+
+        personalDatasRepository.deleteById(id);
     }
 
-    public void editPersonalData(final PersonalDataDto personalDataDto) throws InvalidParametersException {
+    public PersonalData editPersonalData(final PersonalDataDto personalDataDto) throws ItemNotFoundException {
         if (!personalDatasRepository.existsById(personalDataDto.getId())) {
-            throw new InvalidParametersException("Personal data with id = " + personalDataDto.getId() + " does not exist");
+            throw new ItemNotFoundException("Personal data with id = " + personalDataDto.getId() + " does not exist");
         }
 
         PersonalData personalData = new PersonalData();
@@ -57,6 +58,6 @@ public class PersonalDatasService {
         personalData.setName(personalDataDto.getName());
         personalData.setSurname(personalDataDto.getSurname());
 
-        personalDatasRepository.save(personalData);
+        return personalDatasRepository.save(personalData);
     }
 }
