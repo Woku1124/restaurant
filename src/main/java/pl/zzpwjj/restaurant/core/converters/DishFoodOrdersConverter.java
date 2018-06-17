@@ -1,9 +1,7 @@
 package pl.zzpwjj.restaurant.core.converters;
 
 import org.springframework.stereotype.Component;
-import pl.zzpwjj.restaurant.core.model.dto.AddressDto;
 import pl.zzpwjj.restaurant.core.model.dto.DishFoodOrderDto;
-import pl.zzpwjj.restaurant.core.model.entities.Address;
 import pl.zzpwjj.restaurant.core.model.entities.DishFoodOrder;
 
 import java.util.List;
@@ -14,8 +12,8 @@ public class DishFoodOrdersConverter {
     public DishFoodOrderDto convertDishFoodOrder(final DishFoodOrder dishFoodOrder) {
         DishFoodOrderDto dishFoodOrderDto = new DishFoodOrderDto();
         dishFoodOrderDto.setId(dishFoodOrder.getId());
-        dishFoodOrderDto.setDish_id(dishFoodOrder.getDish_id());
-        dishFoodOrderDto.setFood_order_id(dishFoodOrder.getFood_order_id());
+        dishFoodOrderDto.setDish(dishFoodOrder.getDish());
+        dishFoodOrderDto.setFood_order(dishFoodOrder.getFood_order());
         return dishFoodOrderDto;
     }
 

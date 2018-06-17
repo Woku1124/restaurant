@@ -15,10 +15,10 @@ public class DishFoodOrder {
 
     @ManyToOne
     @JoinColumn(name = "food_order")
-    private FoodOrder food_order_id;
+    private FoodOrder food_order;
 
     @ManyToOne
     @JoinColumn(name = "dish")
-    private Dish dish_id;
+    private Dish dish;
 
 }

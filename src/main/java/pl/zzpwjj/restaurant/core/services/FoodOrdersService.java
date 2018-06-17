@@ -55,8 +55,8 @@ public class FoodOrdersService {
     public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException, MessagingException{
         FoodOrder foodOrder = new FoodOrder();
         Double fullPrice = 0d;
-        foodOrder.setPersonal_data_id(personalDatasService.addPersonalData(addFoodOrderInput.getPersonal_data_id()));
-        foodOrder.setAddress_id(addressesService.addAddress(addFoodOrderInput.getAddress_id()));
+        foodOrder.setPersonal_data(personalDatasService.addPersonalData(addFoodOrderInput.getPersonal_data()));
+        foodOrder.setAddress(addressesService.addAddress(addFoodOrderInput.getAddress()));
         foodOrder.setDate_of_order(LocalDate.now());
         foodOrder.setDate_of_realization(null);
         for(String dishName : addFoodOrderInput.getDish_names()) {
@@ -73,16 +73,16 @@ public class FoodOrdersService {
 
         for(String dishName : addFoodOrderInput.getDish_names()) {
             AddDishFoodOrderInput dishFoodOrder = new AddDishFoodOrderInput();
-            dishFoodOrder.setDish_id(dishesService.getDishByName(dishName));
+            dishFoodOrder.setDish(dishesService.getDishByName(dishName));
             dishFoodOrdersService.addDishFoodOrder(dishFoodOrder);
         }
 
         try {
-            emailSenderService.sendEmail(foodOrder.getAddress_id().getEmail(), "We received your order",
+            emailSenderService.sendEmail(foodOrder.getAddress().getEmail(), "We received your order",
                     "Potwierdzamy złożenie zamówienia nr " + foodOrder.getId());
         }
         catch(MessagingException e){
-            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress_id().getEmail(), e);
+            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress().getEmail(), e);
         }
 
     }
@@ -92,8 +92,8 @@ public class FoodOrdersService {
             dishFoodOrdersService.deleteDishFoodOrdersByFoodOrderId(id);
             FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
             foodOrdersRepository.deleteById(id);
-            personalDatasService.deletePersonalData(foodOrder.getPersonal_data_id().getId());
-            addressesService.deleteAddress(foodOrder.getAddress_id().getId());
+            personalDatasService.deletePersonalData(foodOrder.getPersonal_data().getId());
+            addressesService.deleteAddress(foodOrder.getAddress().getId());
         }
         catch (EmptyResultDataAccessException e) {
             throw new ItemNotFoundException("Food order with id = " + id + " does not exist", e);
@@ -106,8 +106,8 @@ public class FoodOrdersService {
         }
         FoodOrder foodOrder = new FoodOrder();
         foodOrder.setId(foodOrderDto.getId());
-        foodOrder.setPersonal_data_id(foodOrderDto.getPersonal_data_id());
-        foodOrder.setAddress_id(foodOrderDto.getAddress_id());
+        foodOrder.setPersonal_data(foodOrderDto.getPersonal_data());
+        foodOrder.setAddress(foodOrderDto.getAddress());
         foodOrder.setDate_of_order(foodOrderDto.getDate_of_order());
         foodOrder.setDate_of_realization(foodOrderDto.getDate_of_realization());
         foodOrder.setFull_price(foodOrderDto.getFull_price());
@@ -123,11 +123,11 @@ public class FoodOrdersService {
         foodOrder.setDate_of_realization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
         try {
-            emailSenderService.sendEmail(foodOrder.getAddress_id().getEmail(), "Your order was realized",
+            emailSenderService.sendEmail(foodOrder.getAddress().getEmail(), "Your order was realized",
                     "We hope you will order from us again");
         }
         catch(MessagingException e){
-            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress_id().getEmail(), e);
+            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress().getEmail(), e);
         }
     }
 

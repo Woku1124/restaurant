@@ -17,11 +17,11 @@ public class FoodOrder {
 
     @OneToOne
     @JoinColumn(name = "personal_data")
-    private PersonalData personal_data_id;
+    private PersonalData personal_data;
 
     @OneToOne
     @JoinColumn(name = "address")
-    private Address address_id;
+    private Address address;
 
     @NotNull
     private Double full_price;

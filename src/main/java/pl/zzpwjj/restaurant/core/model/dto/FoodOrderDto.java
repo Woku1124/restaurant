@@ -19,10 +19,10 @@ public class FoodOrderDto {
     private Long id;
 
     @NotNull
-    private PersonalData personal_data_id;
+    private PersonalData personal_data;
 
     @NotNull
-    private Address address_id;
+    private Address address;
 
     @NotNull
     private Double full_price;

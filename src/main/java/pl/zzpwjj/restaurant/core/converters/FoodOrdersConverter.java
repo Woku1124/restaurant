@@ -12,8 +12,8 @@ public class FoodOrdersConverter {
     public FoodOrderDto convertFoodOrder(final FoodOrder foodOrder) {
         FoodOrderDto foodOrderDto = new FoodOrderDto();
         foodOrderDto.setId(foodOrder.getId());
-        foodOrderDto.setPersonal_data_id(foodOrder.getPersonal_data_id());
-        foodOrderDto.setAddress_id(foodOrder.getAddress_id());
+        foodOrderDto.setPersonal_data(foodOrder.getPersonal_data());
+        foodOrderDto.setAddress(foodOrder.getAddress());
         foodOrderDto.setDate_of_order(foodOrder.getDate_of_order());
         foodOrderDto.setDate_of_realization(foodOrder.getDate_of_realization());
         foodOrderDto.setFull_price(foodOrder.getFull_price());

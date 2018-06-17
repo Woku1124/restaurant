@@ -15,10 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 public class AddFoodOrderInput {
     @NotNull
-    private AddPersonalDataInput personal_data_id;
+    private AddPersonalDataInput personal_data;
 
     @NotNull
-    private AddAddressInput address_id;
+    private AddAddressInput address;
 
     @NotNull
     private List<String> dish_names;

@@ -16,9 +16,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class AddDishFoodOrderInput {
     @NotNull
-    private FoodOrder food_order_id;
+    private FoodOrder food_order;
 
     @NotNull
-    private Dish dish_id;
+    private Dish dish;
 
 }
