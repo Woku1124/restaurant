@@ -1,6 +1,7 @@
 package pl.zzpwjj.restaurant.core.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.DataSourceException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
@@ -18,7 +19,7 @@ public class TablesService {
     private ReservationService reservationService;
 
     @Autowired
-    public TablesService(final TablesRepository tablesRepository, final ReservationService reservationService)
+    public TablesService(final TablesRepository tablesRepository, @Lazy final ReservationService reservationService)
     {
         this.tablesRepository=tablesRepository;
         this.reservationService=reservationService;

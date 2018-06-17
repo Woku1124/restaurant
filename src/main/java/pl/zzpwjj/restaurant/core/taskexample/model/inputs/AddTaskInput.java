@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.model.dto;
+package pl.zzpwjj.restaurant.core.taskexample.model.inputs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

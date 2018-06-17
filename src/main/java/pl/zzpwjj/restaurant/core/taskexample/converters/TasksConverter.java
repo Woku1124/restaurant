@@ -1,12 +1,12 @@
-package pl.zzpwjj.restaurant.core.converters;
+package pl.zzpwjj.restaurant.core.taskexample.converters;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import pl.zzpwjj.restaurant.core.model.dto.TaskDto;
-import pl.zzpwjj.restaurant.core.model.entities.Task;
+import pl.zzpwjj.restaurant.core.taskexample.model.dto.TaskDto;
+import pl.zzpwjj.restaurant.core.taskexample.model.entities.Task;
 
 @Component
 public class TasksConverter {

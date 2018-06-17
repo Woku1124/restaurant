@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.model.entities;
+package pl.zzpwjj.restaurant.core.taskexample.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

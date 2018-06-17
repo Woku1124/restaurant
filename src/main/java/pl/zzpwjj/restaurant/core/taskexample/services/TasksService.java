@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.services;
+package pl.zzpwjj.restaurant.core.taskexample.services;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.dto.AddTaskInput;
-import pl.zzpwjj.restaurant.core.model.dto.TaskDto;
-import pl.zzpwjj.restaurant.core.model.entities.Task;
-import pl.zzpwjj.restaurant.core.repositories.TasksRepository;
+import pl.zzpwjj.restaurant.core.taskexample.model.inputs.AddTaskInput;
+import pl.zzpwjj.restaurant.core.taskexample.model.dto.TaskDto;
+import pl.zzpwjj.restaurant.core.taskexample.model.entities.Task;
+import pl.zzpwjj.restaurant.core.taskexample.repositories.TasksRepository;
 
 @Service
 public class TasksService {
