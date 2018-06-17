@@ -44,7 +44,7 @@ public class FoodOrdersService {
     }
 
     public List<FoodOrder> getNotRealizedFoodOrders() {
-        return foodOrdersRepository.findAll();
+        return foodOrdersRepository.findAllWhereDateOfRealizationIsNull();
     }
 
 
