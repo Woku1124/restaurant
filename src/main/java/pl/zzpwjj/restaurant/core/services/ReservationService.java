@@ -1,7 +1,6 @@
 package pl.zzpwjj.restaurant.core.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -10,6 +9,8 @@ import pl.zzpwjj.restaurant.common.exceptions.DataSourceException;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.converters.ReservationConverter;
+import pl.zzpwjj.restaurant.core.foodOrders.services.AddressesService;
+import pl.zzpwjj.restaurant.core.foodOrders.services.PersonalDatasService;
 import pl.zzpwjj.restaurant.core.model.dto.ReservationDto;
 import pl.zzpwjj.restaurant.core.model.entities.Reservation;
 import pl.zzpwjj.restaurant.core.model.entities.Table;

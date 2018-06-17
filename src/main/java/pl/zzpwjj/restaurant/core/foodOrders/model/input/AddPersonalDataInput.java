@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.model.inputs;
+package pl.zzpwjj.restaurant.core.foodOrders.model.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

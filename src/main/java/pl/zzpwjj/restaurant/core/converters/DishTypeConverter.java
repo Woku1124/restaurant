@@ -1,9 +1,7 @@
 package pl.zzpwjj.restaurant.core.converters;
 
 import org.springframework.stereotype.Component;
-import pl.zzpwjj.restaurant.core.model.dto.AddressDto;
 import pl.zzpwjj.restaurant.core.model.dto.DishTypeDto;
-import pl.zzpwjj.restaurant.core.model.entities.Address;
 import pl.zzpwjj.restaurant.core.model.entities.DishType;
 
 import java.util.List;

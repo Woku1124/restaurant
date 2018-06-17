@@ -1,12 +1,10 @@
-package pl.zzpwjj.restaurant.core.repositories;
+package pl.zzpwjj.restaurant.core.foodOrders.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
+import pl.zzpwjj.restaurant.core.foodOrders.model.entities.FoodOrder;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository

@@ -1,7 +1,8 @@
-package pl.zzpwjj.restaurant.core.model.entities;
+package pl.zzpwjj.restaurant.core.foodOrders.model.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.zzpwjj.restaurant.core.model.entities.Dish;
 
 import javax.persistence.*;
 

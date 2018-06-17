@@ -1,27 +1,26 @@
-package pl.zzpwjj.restaurant.core.model.dto;
+package pl.zzpwjj.restaurant.core.foodOrders.model.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.zzpwjj.restaurant.core.model.entities.Address;
-import pl.zzpwjj.restaurant.core.model.entities.PersonalData;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class FoodOrderDto {
-    @NotNull
+@Entity(name = "food_order")
+public class FoodOrder {
+    @Id
+    @GeneratedValue
     private Long id;
 
-    @NotNull
+    @OneToOne
+    @JoinColumn(name = "personal_data")
     private PersonalData personalData;
 
-    @NotNull
+    @OneToOne
+    @JoinColumn(name = "address")
     private Address address;
 
     @NotNull
@@ -31,4 +30,5 @@ public class FoodOrderDto {
     private LocalDate dateOfOrder;
 
     private LocalDate dateOfRealization;
+
 }

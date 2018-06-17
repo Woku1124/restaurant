@@ -3,6 +3,8 @@ package pl.zzpwjj.restaurant.core.model.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.zzpwjj.restaurant.core.foodOrders.model.entities.Address;
+import pl.zzpwjj.restaurant.core.foodOrders.model.entities.PersonalData;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

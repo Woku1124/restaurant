@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.model.dto;
+package pl.zzpwjj.restaurant.core.foodOrders.model.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,9 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDto {
+public class AddAddressInput {
     @NotNull
-    private Long id;
-
-    @NotNull
-    private Long phone_nr;
+    private Long phoneNr;
 
     @NotNull
     private String email;

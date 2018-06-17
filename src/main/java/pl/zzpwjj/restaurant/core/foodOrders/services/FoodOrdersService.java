@@ -1,4 +1,4 @@
-package pl.zzpwjj.restaurant.core.services;
+package pl.zzpwjj.restaurant.core.foodOrders.services;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
-import pl.zzpwjj.restaurant.core.model.inputs.AddDishFoodOrderInput;
-import pl.zzpwjj.restaurant.core.model.inputs.AddFoodOrderInput;
-import pl.zzpwjj.restaurant.core.model.dto.FoodOrderDto;
-import pl.zzpwjj.restaurant.core.model.entities.FoodOrder;
-import pl.zzpwjj.restaurant.core.repositories.FoodOrdersRepository;
+import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddDishFoodOrderInput;
+import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddFoodOrderInput;
+import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
+import pl.zzpwjj.restaurant.core.foodOrders.model.entities.FoodOrder;
+import pl.zzpwjj.restaurant.core.foodOrders.repositories.FoodOrdersRepository;
+import pl.zzpwjj.restaurant.core.services.DishesService;
+import pl.zzpwjj.restaurant.core.services.RestaurantEmailSenderService;
 
 import javax.mail.MessagingException;
 
