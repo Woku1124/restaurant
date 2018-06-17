@@ -28,6 +28,7 @@ import pl.zzpwjj.restaurant.core.foodOrders.converters.FoodOrdersConverter;
 import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddFoodOrderInput;
 import pl.zzpwjj.restaurant.core.foodOrders.services.FoodOrdersService;
+import pl.zzpwjj.restaurant.core.foodOrders.validators.FoodOrderValidator;
 
 @RequestMapping("/foodOrders")
 @Api(value = "Food orders endpoint")
@@ -36,11 +37,14 @@ public class FoodOrdersEndpoint {
 
     private FoodOrdersService foodOrdersService;
     private FoodOrdersConverter foodOrdersConverter;
+    private FoodOrderValidator validator;
 
     @Autowired
-    public FoodOrdersEndpoint(final FoodOrdersService foodOrdersService, final FoodOrdersConverter foodOrdersConverter) {
+    public FoodOrdersEndpoint(final FoodOrdersService foodOrdersService, final FoodOrdersConverter foodOrdersConverter,
+                              final FoodOrderValidator validator) {
         this.foodOrdersService = foodOrdersService;
         this.foodOrdersConverter = foodOrdersConverter;
+        this.validator = validator;
     }
 
     @ApiOperation(value = "Returns all food orders")
@@ -76,7 +80,9 @@ public class FoodOrdersEndpoint {
     @ApiOperation(value = "Adds food order")
     @PostMapping("/addFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> addFoodOrder(@RequestBody @Valid final AddFoodOrderInput addFoodOrderInput) throws ItemNotFoundException, MessagingException {
+    public ResponseEntity<Void> addFoodOrder(@RequestBody @Valid final AddFoodOrderInput addFoodOrderInput)
+            throws ItemNotFoundException, MessagingException, InvalidParametersException {
+        validator.validate(addFoodOrderInput);
         foodOrdersService.addFoodOrder(addFoodOrderInput);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

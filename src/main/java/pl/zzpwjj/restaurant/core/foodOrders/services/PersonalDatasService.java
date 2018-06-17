@@ -9,7 +9,6 @@ import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddPersonalDataInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.dto.PersonalDataDto;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.PersonalData;
 import pl.zzpwjj.restaurant.core.foodOrders.repositories.PersonalDatasRepository;
-import pl.zzpwjj.restaurant.core.foodOrders.validators.PersonalDataValidator;
 
 import java.util.List;
 
@@ -17,7 +16,6 @@ import java.util.List;
 public class PersonalDatasService {
 
     private PersonalDatasRepository personalDatasRepository;
-    private PersonalDataValidator validator;
 
     @Autowired
     public PersonalDatasService(final PersonalDatasRepository personalDatasRepository) {
@@ -32,9 +30,7 @@ public class PersonalDatasService {
         return personalDatasRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public PersonalData addPersonalData(final AddPersonalDataInput addPersonalDataInput)
-            throws InvalidParametersException {
-        validator.validate(addPersonalDataInput);
+    public PersonalData addPersonalData(final AddPersonalDataInput addPersonalDataInput) {
         PersonalData personalData = new PersonalData();
         personalData.setName(addPersonalDataInput.getName());
         personalData.setSurname(addPersonalDataInput.getSurname());

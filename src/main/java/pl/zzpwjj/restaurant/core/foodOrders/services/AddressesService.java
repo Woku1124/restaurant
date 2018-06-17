@@ -12,18 +12,15 @@ import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddAddressInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.dto.AddressDto;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.Address;
 import pl.zzpwjj.restaurant.core.foodOrders.repositories.AddressesRepository;
-import pl.zzpwjj.restaurant.core.foodOrders.validators.AddressValidator;
 
 @Service
 public class AddressesService {
 
     private AddressesRepository addressesRepository;
-    private AddressValidator validator;
 
     @Autowired
-    public AddressesService(final AddressesRepository addressesRepository,  AddressValidator validator) {
+    public AddressesService(final AddressesRepository addressesRepository) {
         this.addressesRepository = addressesRepository;
-        this.validator = validator;
     }
 
     public List<Address> getAddresses() {
@@ -34,10 +31,7 @@ public class AddressesService {
         return addressesRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public Address addAddress(final AddAddressInput addAddressInput) throws InvalidParametersException {
-        // validate
-        validator.validate(addAddressInput);
-
+    public Address addAddress(final AddAddressInput addAddressInput) {
         //create object
         Address address = new Address();
         address.setPhoneNr(addAddressInput.getPhoneNr());

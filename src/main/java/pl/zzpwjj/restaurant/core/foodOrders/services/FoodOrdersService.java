@@ -15,7 +15,6 @@ import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.FoodOrder;
 import pl.zzpwjj.restaurant.core.foodOrders.repositories.FoodOrdersRepository;
 import pl.zzpwjj.restaurant.core.dishes.services.DishesService;
-import pl.zzpwjj.restaurant.core.foodOrders.validators.FoodOrderValidator;
 import pl.zzpwjj.restaurant.core.services.RestaurantEmailSenderService;
 
 import javax.mail.MessagingException;
@@ -29,20 +28,17 @@ public class FoodOrdersService {
     private DishFoodOrdersService dishFoodOrdersService;
     private DishesService dishesService;
     private RestaurantEmailSenderService emailSenderService;
-    private FoodOrderValidator validator;
 
     @Autowired
     public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository, final AddressesService addressesService,
                              final PersonalDatasService personalDatasService, final DishFoodOrdersService dishFoodOrdersService,
-                             final DishesService dishesService, RestaurantEmailSenderService emailSenderService,
-                             final FoodOrderValidator validator) {
+                             final DishesService dishesService, RestaurantEmailSenderService emailSenderService) {
         this.foodOrdersRepository = foodOrdersRepository;
         this.addressesService = addressesService;
         this.personalDatasService = personalDatasService;
         this.dishFoodOrdersService = dishFoodOrdersService;
         this.dishesService = dishesService;
         this.emailSenderService = emailSenderService;
-        this.validator = validator;
     }
 
     public List<FoodOrder> getFoodOrders() {
@@ -59,8 +55,7 @@ public class FoodOrdersService {
     }
 
     public void addFoodOrder(final AddFoodOrderInput addFoodOrderInput)
-            throws ItemNotFoundException, MessagingException, InvalidParametersException {
-        validator.validate(addFoodOrderInput);
+            throws ItemNotFoundException, MessagingException {
         FoodOrder foodOrder = new FoodOrder();
         Double fullPrice = 0d;
         foodOrder.setPersonalData(personalDatasService.addPersonalData(addFoodOrderInput.getPersonalData()));
