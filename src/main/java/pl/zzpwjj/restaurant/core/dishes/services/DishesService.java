@@ -24,7 +24,7 @@ public class DishesService {
     private DishTypesServices dishTypesServices;
 
     @Autowired
-    public DishesService(final DishesRepository dishesRepository, final RatingsService ratingsService,
+    public DishesService(final DishesRepository dishesRepository, @Lazy final RatingsService ratingsService,
                          final DishFoodOrdersService dishFoodOrdersService, @Lazy final DishTypesServices dishTypesServices) {
         this.dishesRepository = dishesRepository;
         this.ratingsService = ratingsService;

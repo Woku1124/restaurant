@@ -19,7 +19,7 @@ public class DishFoodOrder {
     private FoodOrder foodOrder;
 
     @ManyToOne
-    @JoinColumn(name = "dish")
+    @JoinColumn(name = "dishName")
     private Dish dish;
 
 }

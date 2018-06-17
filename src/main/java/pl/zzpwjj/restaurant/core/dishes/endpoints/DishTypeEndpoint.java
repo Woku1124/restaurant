@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @RequestMapping("/dishType")
-@Api(value = "dish Type endpoint")
+@Api(value = "dishName Type endpoint")
 @RestController
 public class DishTypeEndpoint {
 
@@ -34,7 +34,7 @@ public class DishTypeEndpoint {
         this.dishTypeConverter = dishTypeConverter;
     }
 
-    @ApiOperation(value = "Returns all dish types")
+    @ApiOperation(value = "Returns all dishName types")
     @GetMapping("/getDishTypes")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<DishTypeDto>> getDishTypes() {
@@ -42,7 +42,7 @@ public class DishTypeEndpoint {
         return new ResponseEntity<>(dishTypeDtos, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Returns dish type")
+    @ApiOperation(value = "Returns dishName type")
     @GetMapping("/getDishType")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<DishTypeDto> getDishType(@RequestParam("id") @NotNull final Long id) {
@@ -55,7 +55,7 @@ public class DishTypeEndpoint {
         return new ResponseEntity<>(dishTypeDto, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Adds dish type")
+    @ApiOperation(value = "Adds dishName type")
     @PostMapping("/addDishType")
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> addDishType(@RequestBody @Valid final AddDishTypeInput addDishTypeInput) {
@@ -63,7 +63,7 @@ public class DishTypeEndpoint {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Removes dish type")
+    @ApiOperation(value = "Removes dishName type")
     @DeleteMapping("/deleteDishType")
     public ResponseEntity<Void> deleteDishType(@RequestParam("id") @NotNull final Long id) {
         try {
@@ -74,7 +74,7 @@ public class DishTypeEndpoint {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Edits dish type")
+    @ApiOperation(value = "Edits dishName type")
     @PostMapping("/editDishType")
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> editDishType(@RequestBody @Valid final DishTypeDto dishTypeDto) {

@@ -50,7 +50,7 @@ public class DishEndpoint {
         return new ResponseEntity<>(dishDtos, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Returns dish")
+    @ApiOperation(value = "Returns dishName")
     @GetMapping("/getDish")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<DishDto> getDish(@RequestParam("id") @NotNull final Long id) {
@@ -63,7 +63,7 @@ public class DishEndpoint {
         return new ResponseEntity<>(dishDto, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Returns most ordered dish/dishes")
+    @ApiOperation(value = "Returns most ordered dishName/dishes")
     @GetMapping("/getMostOrderedDish")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<DishDto>> getMostOrderedDish() {
@@ -71,7 +71,7 @@ public class DishEndpoint {
         return new ResponseEntity<>(dishDtos, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Adds dish")
+    @ApiOperation(value = "Adds dishName")
     @PostMapping("/addDish")
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> addDish(@RequestBody @Valid final AddDishInput addDishInput) {
@@ -79,7 +79,7 @@ public class DishEndpoint {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Removes dish")
+    @ApiOperation(value = "Removes dishName")
     @DeleteMapping("/deleteDish")
     public ResponseEntity<Void> deleteDish(@RequestParam("id") @NotNull final Long id) {
         try {
@@ -90,7 +90,7 @@ public class DishEndpoint {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Edits dish")
+    @ApiOperation(value = "Edits dishName")
     @PostMapping("/editDish")
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> editDish(@RequestBody @Valid final DishDto dishDto) {
@@ -102,7 +102,7 @@ public class DishEndpoint {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Returns dish")
+    @ApiOperation(value = "Returns dishName")
     @GetMapping("/getDishByName")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<DishDto> getDish(@RequestParam("name") @NotNull final String name) {

@@ -16,10 +16,12 @@ import java.util.List;
 public class RatingsService {
 
     private RatingsRepository ratingsRepository;
+    private DishesService dishesService;
 
     @Autowired
-    public RatingsService(final RatingsRepository ratingsRepository) {
+    public RatingsService(final RatingsRepository ratingsRepository, final DishesService dishesService) {
         this.ratingsRepository = ratingsRepository;
+        this.dishesService = dishesService;
     }
 
     public List<Rating> getRatings() {
@@ -40,7 +42,12 @@ public class RatingsService {
 
     public Rating addRating(final AddRatingInput addRatingInput) {
         Rating rating = new Rating();
-        rating.setDish(addRatingInput.getDish());
+        try {
+            rating.setDish(dishesService.getDishByName(addRatingInput.getDishName()));
+        }
+        catch (ItemNotFoundException e){
+            e.printStackTrace();
+        }
         rating.setMark(addRatingInput.getMark());
         rating.setComment(addRatingInput.getComment());
 

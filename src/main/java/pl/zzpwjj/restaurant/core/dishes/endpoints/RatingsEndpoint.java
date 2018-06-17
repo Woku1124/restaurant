@@ -42,7 +42,7 @@ public class RatingsEndpoint {
         return new ResponseEntity<>(ratingDtos, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Returns all ratings with dish name equals to")
+    @ApiOperation(value = "Returns all ratings with dishName name equals to")
     @GetMapping("/getRatingswithDishNameEqualsTo")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<RatingDto>> getRatingswithDishIdEqualsTo(@RequestParam("name") @NotNull final String name) {
