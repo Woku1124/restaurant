@@ -53,7 +53,7 @@ public class ReservationService {
         return reservationRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-    public void addReservation(AddReservationInput addReservationInput) throws DataSourceException, MessagingException , MailSendException {
+    public Reservation addReservation(AddReservationInput addReservationInput) throws DataSourceException, MessagingException , MailSendException {
         Reservation reservation = new Reservation();
         reservation.setAddressId(addressesService.addAddress(addReservationInput.getAddressId()));
         reservation.setReservationDateTime(addReservationInput.getReservationDateTime());
@@ -62,15 +62,16 @@ public class ReservationService {
         if(freeTables.isEmpty()){
             throw new DataSourceException("No free Tables");
         }
-        reservationRepository.save(reservation);
+        reservation = reservationRepository.save(reservation);
         tablesService.reserveTable(reservation,freeTables.get(0));
         emailSenderService.send(reservation.getAddressId().getEmail(),reservation.getReservationDateTime());
+        return reservation;
     }
-    public void editReservation(ReservationDto reservationDto) throws InvalidParametersException {
+    public Reservation editReservation(ReservationDto reservationDto) throws InvalidParametersException {
         if (!reservationRepository.existsById(reservationDto.getId())) {
             throw new InvalidParametersException("Food order with id = " + reservationDto.getId() + " does not exist");
         }
-        reservationRepository.save(reservationConverter.convertToReservationFromDto(reservationRepository.findById(reservationDto.getId())));
+        return reservationRepository.save(reservationConverter.convertToReservationFromDto(reservationDto));
     }
     public void deleteReservation(final Long id) throws ItemNotFoundException {
         try {

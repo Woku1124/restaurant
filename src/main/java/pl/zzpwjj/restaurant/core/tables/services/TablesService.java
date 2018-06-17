@@ -39,17 +39,17 @@ public class TablesService {
         return tablesRepository.findAll().stream().filter(e -> e.getReservationId()==null).collect(Collectors.toList());
     }
 
-    public void reserveTable(Reservation reservation, Table table){
+    public Table reserveTable(Reservation reservation, Table table){
         table.setReservationId(reservation);
-        tablesRepository.save(table);
+        return tablesRepository.save(table);
     }
 
-    public void addTable(AddTableInput addTableInput)
+    public Table addTable(AddTableInput addTableInput)
     {
         Table table = new Table();
         table.setReservationId(addTableInput.getReservationId());
 
-        tablesRepository.save(table);
+        return tablesRepository.save(table);
     }
 
     public void deleteTable(final Long id) throws ItemNotFoundException {

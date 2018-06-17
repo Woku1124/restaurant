@@ -5,7 +5,6 @@ import pl.zzpwjj.restaurant.core.reservations.model.dto.ReservationDto;
 import pl.zzpwjj.restaurant.core.reservations.model.entities.Reservation;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,12 +19,12 @@ public class ReservationConverter {
         return reservationDto;
     }
 
-    public Reservation convertToReservationFromDto(final Optional<Reservation> reservationDto){
+    public Reservation convertToReservationFromDto(final ReservationDto reservationDto){
         Reservation reservation = new Reservation();
-        reservation.setId(reservationDto.get().getId());
-        reservation.setClientPersonalDataId(reservationDto.get().getClientPersonalDataId());
-        reservation.setReservationDateTime(reservationDto.get().getReservationDateTime());
-        reservation.setAddressId(reservationDto.get().getAddressId());
+        reservation.setId(reservationDto.getId());
+        reservation.setClientPersonalDataId(reservationDto.getClientPersonalDataId());
+        reservation.setReservationDateTime(reservationDto.getReservationDateTime());
+        reservation.setAddressId(reservationDto.getAddressId());
         return reservation;
     }
 
