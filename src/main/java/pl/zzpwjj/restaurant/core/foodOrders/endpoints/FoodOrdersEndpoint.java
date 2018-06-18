@@ -102,13 +102,9 @@ public class FoodOrdersEndpoint {
     @ApiOperation(value = "Edits food order")
     @PostMapping("/editFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> editFoodOrder(@RequestBody @Valid final FoodOrderDto foodOrderDto) {
-        try {
+    public ResponseEntity<Void> editFoodOrder(@RequestBody @Valid final FoodOrderDto foodOrderDto) throws ItemNotFoundException {
             foodOrdersService.editFoodOrder(foodOrderDto);
-        }
-        catch (InvalidParametersException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

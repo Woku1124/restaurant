@@ -88,21 +88,20 @@ public class FoodOrdersService {
     }
 
     public void deleteFoodOrder(final Long id) throws ItemNotFoundException {
-        try {
+        if (!foodOrdersRepository.existsById(id)) {
+            throw new ItemNotFoundException("Food order with id = " + id + " does not exist");
+        }
             dishFoodOrdersService.deleteDishFoodOrdersByFoodOrderId(id);
             FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
             foodOrdersRepository.deleteById(id);
             personalDatasService.deletePersonalData(foodOrder.getPersonalData().getId());
             addressesService.deleteAddress(foodOrder.getAddress().getId());
-        }
-        catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("Food order with id = " + id + " does not exist", e);
-        }
+
     }
 
-    public FoodOrder editFoodOrder(final FoodOrderDto foodOrderDto) throws InvalidParametersException {
+    public FoodOrder editFoodOrder(final FoodOrderDto foodOrderDto) throws ItemNotFoundException {
         if (!foodOrdersRepository.existsById(foodOrderDto.getId())) {
-            throw new InvalidParametersException("Food order with id = " + foodOrderDto.getId() + " does not exist");
+            throw new ItemNotFoundException("Food order with id = " + foodOrderDto.getId() + " does not exist");
         }
         FoodOrder foodOrder = new FoodOrder();
         foodOrder.setId(foodOrderDto.getId());
