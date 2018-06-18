@@ -89,11 +89,4 @@ public class DishesService {
         return dishesRepository.findByName(name);
     }
 
-    public List<Dish> getMostOrderedDish(){
-        List <Dish> mostOrderedDish = new ArrayList<>();
-        for(Long id : dishFoodOrdersService.getMostOrderedDishId()){
-            mostOrderedDish.add(dishesRepository.findById(id).get());
-        }
-        return mostOrderedDish;
-    }
 }

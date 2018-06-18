@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
-import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddDishFoodOrderInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddFoodOrderInput;
@@ -16,7 +13,6 @@ import pl.zzpwjj.restaurant.core.foodOrders.model.entities.FoodOrder;
 import pl.zzpwjj.restaurant.core.foodOrders.repositories.FoodOrdersRepository;
 import pl.zzpwjj.restaurant.core.dishes.services.DishesService;
 import pl.zzpwjj.restaurant.core.services.EmailSenderService;
-import pl.zzpwjj.restaurant.core.services.RestaurantEmailSenderService;
 
 import javax.mail.MessagingException;
 
@@ -49,7 +45,6 @@ public class FoodOrdersService {
     public List<FoodOrder> getNotRealizedFoodOrders() {
         return foodOrdersRepository.findAllWhereDateOfRealizationIsNull();
     }
-
 
     public FoodOrder getFoodOrder(final Long id) throws ItemNotFoundException {
         return foodOrdersRepository.findById(id).orElseThrow(ItemNotFoundException::new);
@@ -121,13 +116,9 @@ public class FoodOrdersService {
         FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
         foodOrder.setDateOfRealization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
-        try {
-            emailSenderService.send(foodOrder.getAddress().getEmail(), "Your order was realized",
+        emailSenderService.send(foodOrder.getAddress().getEmail(), "Your order was realized",
                     "We hope you will order from us again");
-        }
-        catch(MessagingException e){
-            throw new MessagingException("Couldn't send email to " + foodOrder.getAddress().getEmail(), e);
-        }
+
     }
 
 }

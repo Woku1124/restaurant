@@ -49,7 +49,7 @@ public class DishFoodOrdersService {
             throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist");
         }
 
-        dishFoodOrderRepository.deleteById(id);
+        dishFoodOrderRepository.deleteAllById(id);
     }
 
 
@@ -66,7 +66,4 @@ public class DishFoodOrdersService {
         dishFoodOrderRepository.save(dishFoodOrder);
     }
 
-    public List<Long> getMostOrderedDishId(){
-        return dishFoodOrderRepository.findMostOrderedDishId();
-    }
 }

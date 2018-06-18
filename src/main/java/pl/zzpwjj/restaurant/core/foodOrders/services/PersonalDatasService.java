@@ -1,9 +1,7 @@
 package pl.zzpwjj.restaurant.core.foodOrders.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddPersonalDataInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.dto.PersonalDataDto;

@@ -12,7 +12,4 @@ public interface DishFoodOrderRepository extends JpaRepository<DishFoodOrder, Lo
 
     void deleteAllById(Long id);
 
-    @Query("SELECT f.dish FROM dish_food_order f GROUP BY f.dish ORDER BY Count(f.dish) DESC ")
-    List<Long> findMostOrderedDishId();
-
 }
