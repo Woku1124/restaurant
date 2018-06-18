@@ -80,7 +80,7 @@ public class FinancesEndpoint {
     }
 
     @ApiOperation(value = "Returns an outgoing")
-    @GetMapping("/getIncome")
+    @GetMapping("/getOutgoing")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<OutgoingDto> getOutgoing(@RequestParam("id") @NotNull final Long id) {
         OutgoingDto outgoing;
