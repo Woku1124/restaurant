@@ -14,12 +14,12 @@ import pl.zzpwjj.restaurant.core.dishes.repositories.DishTypesRepository;
 import java.util.List;
 
 @Service
-public class DishTypesServices {
+public class DishTypesService {
     private DishTypesRepository dishTypesRepository;
     private DishesService dishesService;
 
     @Autowired
-    public DishTypesServices(final DishTypesRepository dishTypesRepository, final DishesService dishesService) {
+    public DishTypesService(final DishTypesRepository dishTypesRepository, final DishesService dishesService) {
         this.dishTypesRepository = dishTypesRepository;
         this.dishesService = dishesService;
     }
@@ -35,34 +35,33 @@ public class DishTypesServices {
         return dishTypesRepository.findByName(name);
     }
 
-    public void addDishType(final AddDishTypeInput addDishTypeInput) {
+    public DishType addDishType(final AddDishTypeInput addDishTypeInput) {
         DishType dishType = new DishType();
         dishType.setName(addDishTypeInput.getName());
 
-        dishTypesRepository.save(dishType);
+        return dishTypesRepository.save(dishType);
     }
 
     public void deleteDishType(final Long id) throws ItemNotFoundException {
-        try {
-            List<Dish> dishes = dishesService.getDishesWithTypeIdEqualsTo(id);
-            for(int i = 0; i < dishes.size(); i++){
-                dishesService.deleteDish(dishes.get(i).getId());
-            }
-            dishTypesRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("DishType with id = " + id + " does not exist", e);
+        if (!dishTypesRepository.existsById(id)) {
+            throw new ItemNotFoundException("DishType with id = " + id + " does not exist");
         }
+        List<Dish> dishes = dishesService.getDishesWithTypeIdEqualsTo(id);
+        for(int i = 0; i < dishes.size(); i++){
+            dishesService.deleteDish(dishes.get(i).getId());
+        }
+        dishTypesRepository.deleteById(id);
     }
 
-    public void editDishType(final DishTypeDto dishTypeDto) throws InvalidParametersException {
+    public DishType editDishType(final DishTypeDto dishTypeDto) throws ItemNotFoundException {
         if (!dishTypesRepository.existsById(dishTypeDto.getId())) {
-            throw new InvalidParametersException("DishType with id = " + dishTypeDto.getId() + " does not exist");
+            throw new ItemNotFoundException("DishType with id = " + dishTypeDto.getId() + " does not exist");
         }
 
         DishType dishType = new DishType();
         dishType.setId(dishTypeDto.getId());
         dishType.setName(dishTypeDto.getName());
 
-        dishTypesRepository.save(dishType);
+        return dishTypesRepository.save(dishType);
     }
 }

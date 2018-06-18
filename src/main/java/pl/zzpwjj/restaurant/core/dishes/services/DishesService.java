@@ -21,15 +21,15 @@ public class DishesService {
     private DishesRepository dishesRepository;
     private RatingsService ratingsService;
     private DishFoodOrdersService dishFoodOrdersService;
-    private DishTypesServices dishTypesServices;
+    private DishTypesService dishTypesService;
 
     @Autowired
     public DishesService(final DishesRepository dishesRepository, @Lazy final RatingsService ratingsService,
-                         final DishFoodOrdersService dishFoodOrdersService, @Lazy final DishTypesServices dishTypesServices) {
+                         final DishFoodOrdersService dishFoodOrdersService, @Lazy final DishTypesService dishTypesService) {
         this.dishesRepository = dishesRepository;
         this.ratingsService = ratingsService;
         this.dishFoodOrdersService = dishFoodOrdersService;
-        this.dishTypesServices = dishTypesServices;
+        this.dishTypesService = dishTypesService;
     }
 
     public List<Dish> getDishes() {
@@ -50,7 +50,7 @@ public class DishesService {
 
     public void addDish(final AddDishInput addDishInput) {
         Dish dish = new Dish();
-        dish.setDishType(dishTypesServices.getDishTypeByName(addDishInput.getDishTypeInput().getName()));
+        dish.setDishType(dishTypesService.getDishTypeByName(addDishInput.getDishTypeInput().getName()));
         dish.setPrice(addDishInput.getPrice());
         dish.setName(addDishInput.getName());
         dish.setDescription(addDishInput.getDescription());

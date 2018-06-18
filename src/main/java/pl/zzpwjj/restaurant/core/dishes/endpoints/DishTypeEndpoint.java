@@ -11,7 +11,7 @@ import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.dishes.converters.DishTypeConverter;
 import pl.zzpwjj.restaurant.core.dishes.model.dto.DishTypeDto;
 import pl.zzpwjj.restaurant.core.dishes.model.input.AddDishTypeInput;
-import pl.zzpwjj.restaurant.core.dishes.services.DishTypesServices;
+import pl.zzpwjj.restaurant.core.dishes.services.DishTypesService;
 import pl.zzpwjj.restaurant.core.dishes.validators.DishTypeValidator;
 
 import javax.mail.MessagingException;
@@ -27,13 +27,13 @@ import java.util.List;
 @RestController
 public class DishTypeEndpoint {
 
-    private DishTypesServices dishTypesServices;
+    private DishTypesService dishTypesService;
     private DishTypeConverter dishTypeConverter;
     private DishTypeValidator dishTypeValidator;
 
     @Autowired
-    public DishTypeEndpoint(final DishTypesServices dishTypesServices, final DishTypeConverter dishTypeConverter, final DishTypeValidator dishTypeValidator) {
-        this.dishTypesServices = dishTypesServices;
+    public DishTypeEndpoint(final DishTypesService dishTypesService, final DishTypeConverter dishTypeConverter, final DishTypeValidator dishTypeValidator) {
+        this.dishTypesService = dishTypesService;
         this.dishTypeConverter = dishTypeConverter;
         this.dishTypeValidator = dishTypeValidator;
     }
@@ -42,7 +42,7 @@ public class DishTypeEndpoint {
     @GetMapping("/getDishTypes")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<DishTypeDto>> getDishTypes() {
-        List<DishTypeDto> dishTypeDtos = dishTypeConverter.convertDishTypes(dishTypesServices.getDishTypes());
+        List<DishTypeDto> dishTypeDtos = dishTypeConverter.convertDishTypes(dishTypesService.getDishTypes());
         return new ResponseEntity<>(dishTypeDtos, HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class DishTypeEndpoint {
     public ResponseEntity<DishTypeDto> getDishType(@RequestParam("id") @NotNull final Long id) {
         DishTypeDto dishTypeDto;
         try {
-            dishTypeDto = dishTypeConverter.convertDishType(dishTypesServices.getDishType(id));
+            dishTypeDto = dishTypeConverter.convertDishType(dishTypesService.getDishType(id));
         } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -64,7 +64,7 @@ public class DishTypeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> addDishType(@RequestBody @Valid final AddDishTypeInput addDishTypeInput) throws ItemNotFoundException, MessagingException, InvalidParametersException{
         dishTypeValidator.validate(addDishTypeInput);
-        dishTypesServices.addDishType(addDishTypeInput);
+        dishTypesService.addDishType(addDishTypeInput);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -72,7 +72,7 @@ public class DishTypeEndpoint {
     @DeleteMapping("/deleteDishType")
     public ResponseEntity<Void> deleteDishType(@RequestParam("id") @NotNull final Long id) {
         try {
-            dishTypesServices.deleteDishType(id);
+            dishTypesService.deleteDishType(id);
         } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -84,8 +84,8 @@ public class DishTypeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> editDishType(@RequestBody @Valid final DishTypeDto dishTypeDto) {
         try {
-            dishTypesServices.editDishType(dishTypeDto);
-        } catch (InvalidParametersException e) {
+            dishTypesService.editDishType(dishTypeDto);
+        } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);

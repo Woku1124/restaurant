@@ -55,16 +55,15 @@ public class RatingsService {
     }
 
     public void deleteRating(final Long id) throws ItemNotFoundException {
-        try {
-            ratingsRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("Rating with id = " + id + " does not exist", e);
+        if (!ratingsRepository.existsById(id)) {
+            throw new ItemNotFoundException("Address with id = " + id + " does not exist");
         }
+        ratingsRepository.deleteById(id);
     }
 
-    public void editRating(final RatingDto ratingDto) throws InvalidParametersException {
+    public Rating editRating(final RatingDto ratingDto) throws ItemNotFoundException {
         if (!ratingsRepository.existsById(ratingDto.getId())) {
-            throw new InvalidParametersException("Rating with id = " + ratingDto.getId() + " does not exist");
+            throw new ItemNotFoundException("Rating with id = " + ratingDto.getId() + " does not exist");
         }
 
         Rating rating = new Rating();
@@ -73,6 +72,6 @@ public class RatingsService {
         rating.setMark(ratingDto.getMark());
         rating.setComment(ratingDto.getComment());
 
-        ratingsRepository.save(rating);
+        return ratingsRepository.save(rating);
     }
 }

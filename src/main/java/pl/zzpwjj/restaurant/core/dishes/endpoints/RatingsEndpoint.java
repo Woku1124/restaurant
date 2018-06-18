@@ -93,7 +93,7 @@ public class RatingsEndpoint {
     public ResponseEntity<Void> editRating(@RequestBody @Valid final RatingDto ratingDto) {
         try {
             ratingsService.editRating(ratingDto);
-        } catch (InvalidParametersException e) {
+        } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);
