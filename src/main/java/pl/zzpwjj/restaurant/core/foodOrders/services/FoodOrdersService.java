@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddDishFoodOrderInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddFoodOrderInput;
@@ -109,11 +110,14 @@ public class FoodOrdersService {
         return foodOrdersRepository.save(foodOrder);
     }
 
-    public void realizeFoodOrder(final Long id) throws ItemNotFoundException, MessagingException {
+    public void realizeFoodOrder(final Long id) throws ItemNotFoundException, MessagingException, InvalidParametersException {
         if (!foodOrdersRepository.existsById(id)) {
             throw new ItemNotFoundException("Food order with id = " + id + " does not exist");
         }
         FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
+        if(foodOrder.getDateOfRealization() != null){
+            throw new InvalidParametersException("Food order with id = " + id + " is already realized");
+        }
         foodOrder.setDateOfRealization(LocalDate.now());
         foodOrdersRepository.save(foodOrder);
         emailSenderService.send(foodOrder.getAddress().getEmail(), "Your order was realized",

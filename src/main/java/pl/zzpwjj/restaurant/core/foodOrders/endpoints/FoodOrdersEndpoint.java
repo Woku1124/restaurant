@@ -58,14 +58,11 @@ public class FoodOrdersEndpoint {
     @ApiOperation(value = "Returns food order")
     @GetMapping("/getFoodOrder")
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<FoodOrderDto> getFoodOrder(@RequestParam("id") @NotNull final Long id) {
+    public ResponseEntity<FoodOrderDto> getFoodOrder(@RequestParam("id") @NotNull final Long id)
+            throws ItemNotFoundException {
         FoodOrderDto foodOrderDto;
-        try {
-            foodOrderDto = foodOrdersConverter.convertFoodOrder(foodOrdersService.getFoodOrder(id));
-        }
-        catch (ItemNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        foodOrderDto = foodOrdersConverter.convertFoodOrder(foodOrdersService.getFoodOrder(id));
+
         return new ResponseEntity<>(foodOrderDto, HttpStatus.OK);
     }
 
@@ -73,7 +70,8 @@ public class FoodOrdersEndpoint {
     @GetMapping("/getNotRealizedFoodOrders")
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<FoodOrderDto>> getNotRealizedFoodOrders() {
-        List<FoodOrderDto> foodOrderDtos = foodOrdersConverter.convertFoodOrders(foodOrdersService.getNotRealizedFoodOrders());
+        List<FoodOrderDto> foodOrderDtos = foodOrdersConverter.
+                convertFoodOrders(foodOrdersService.getNotRealizedFoodOrders());
         return new ResponseEntity<>(foodOrderDtos, HttpStatus.OK);
     }
 
@@ -89,20 +87,18 @@ public class FoodOrdersEndpoint {
 
     @ApiOperation(value = "Removes food order")
     @DeleteMapping("/deleteFoodOrder")
-    public ResponseEntity<Void> deleteFoodOrder(@RequestParam("id") @NotNull final Long id) {
-        try {
-            foodOrdersService.deleteFoodOrder(id);
-        }
-        catch (ItemNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Void> deleteFoodOrder(@RequestParam("id") @NotNull final Long id)
+            throws ItemNotFoundException {
+       foodOrdersService.deleteFoodOrder(id);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ApiOperation(value = "Edits food order")
     @PostMapping("/editFoodOrder")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Void> editFoodOrder(@RequestBody @Valid final FoodOrderDto foodOrderDto) throws ItemNotFoundException {
+    public ResponseEntity<Void> editFoodOrder(@RequestBody @Valid final FoodOrderDto foodOrderDto)
+            throws ItemNotFoundException {
             foodOrdersService.editFoodOrder(foodOrderDto);
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -110,13 +106,10 @@ public class FoodOrdersEndpoint {
 
     @ApiOperation(value = "Marks food order as realized")
     @PostMapping("/realizeFoodOrder")
-    public ResponseEntity<Void> realizeFoodOrder(@RequestParam("id") @NotNull final Long id) throws MessagingException {
-        try {
-            foodOrdersService.realizeFoodOrder(id);
-        }
-        catch (ItemNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Void> realizeFoodOrder(@RequestParam("id") @NotNull final Long id) throws MessagingException,
+            InvalidParametersException, ItemNotFoundException {
+        foodOrdersService.realizeFoodOrder(id);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
