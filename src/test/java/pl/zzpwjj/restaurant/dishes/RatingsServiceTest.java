@@ -118,7 +118,7 @@ public class RatingsServiceTest {
         Assert.assertEquals(ratingDto.getDish(), updatedRating.getDish());
         Assert.assertEquals(ratingDto.getMark(), updatedRating.getMark());
         Assert.assertEquals(ratingDto.getComment(), updatedRating.getComment());
-}
+    }
 
     @Test(expected = ItemNotFoundException.class)
     public void shouldNotUpdateRatingButThrowItemNotFoundException() throws ItemNotFoundException {

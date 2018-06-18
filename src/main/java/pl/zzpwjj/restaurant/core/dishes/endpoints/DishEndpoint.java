@@ -93,7 +93,7 @@ public class DishEndpoint {
     public ResponseEntity<Void> editDish(@RequestBody @Valid final DishDto dishDto) {
         try {
             dishesService.editDish(dishDto);
-        } catch (InvalidParametersException e) {
+        } catch (ItemNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);

@@ -20,15 +20,12 @@ import java.util.List;
 public class DishesService {
     private DishesRepository dishesRepository;
     private RatingsService ratingsService;
-    private DishFoodOrdersService dishFoodOrdersService;
     private DishTypesService dishTypesService;
 
     @Autowired
-    public DishesService(final DishesRepository dishesRepository, @Lazy final RatingsService ratingsService,
-                         final DishFoodOrdersService dishFoodOrdersService, @Lazy final DishTypesService dishTypesService) {
+    public DishesService(final DishesRepository dishesRepository, @Lazy final RatingsService ratingsService, @Lazy final DishTypesService dishTypesService) {
         this.dishesRepository = dishesRepository;
         this.ratingsService = ratingsService;
-        this.dishFoodOrdersService = dishFoodOrdersService;
         this.dishTypesService = dishTypesService;
     }
 
@@ -48,31 +45,32 @@ public class DishesService {
         return dishesRepository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public void addDish(final AddDishInput addDishInput) {
+    public Dish addDish(final AddDishInput addDishInput) {
         Dish dish = new Dish();
         dish.setDishType(dishTypesService.getDishTypeByName(addDishInput.getDishTypeInput().getName()));
         dish.setPrice(addDishInput.getPrice());
         dish.setName(addDishInput.getName());
         dish.setDescription(addDishInput.getDescription());
 
-        dishesRepository.save(dish);
+        return dishesRepository.save(dish);
     }
 
     public void deleteDish(final Long id) throws ItemNotFoundException {
-        try {
-            List<Rating> ratings = ratingsService.getRatingsWithDishIdEqualsTo(id);
-            for(int i = 0; i < ratings.size(); i++){
-                ratingsService.deleteRating(ratings.get(i).getId());
-            }
-            dishesRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ItemNotFoundException("Dish with id = " + id + " does not exist", e);
+
+        if (!dishesRepository.existsById(id)) {
+            throw new ItemNotFoundException("Address with id = " + id + " does not exist");
         }
+        List<Rating> ratings = ratingsService.getRatingsWithDishIdEqualsTo(id);
+        for(int i = 0; i < ratings.size(); i++){
+            ratingsService.deleteRating(ratings.get(i).getId());
+        }
+        dishesRepository.deleteById(id);
+
     }
 
-    public void editDish(final DishDto dishDto) throws InvalidParametersException {
+    public Dish editDish(final DishDto dishDto) throws ItemNotFoundException {
         if (!dishesRepository.existsById(dishDto.getId())) {
-            throw new InvalidParametersException("Dish with id = " + dishDto.getId() + " does not exist");
+            throw new ItemNotFoundException("Dish with id = " + dishDto.getId() + " does not exist");
         }
 
         Dish dish = new Dish();
@@ -82,7 +80,7 @@ public class DishesService {
         dish.setName(dishDto.getName());
         dish.setDescription(dishDto.getDescription());
 
-        dishesRepository.save(dish);
+       return dishesRepository.save(dish);
     }
 
     public Dish getDishByName(final String name) throws ItemNotFoundException {
