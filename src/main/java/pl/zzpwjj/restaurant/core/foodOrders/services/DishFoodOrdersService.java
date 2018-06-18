@@ -1,7 +1,6 @@
 package pl.zzpwjj.restaurant.core.foodOrders.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
@@ -49,7 +48,7 @@ public class DishFoodOrdersService {
             throw new ItemNotFoundException("DishFoodOrder with id = " + id + " does not exist");
         }
 
-        dishFoodOrderRepository.deleteAllById(id);
+        dishFoodOrderRepository.deleteAllByFoodOrder_Id(id);
     }
 
 

@@ -16,6 +16,7 @@ import pl.zzpwjj.restaurant.core.dishes.services.DishesService;
 import pl.zzpwjj.restaurant.core.services.EmailSenderService;
 
 import javax.mail.MessagingException;
+import javax.transaction.Transactional;
 
 @Service
 public class FoodOrdersService {
@@ -74,6 +75,7 @@ public class FoodOrdersService {
         for(String dishName : addFoodOrderInput.getDishNames()) {
             AddDishFoodOrderInput dishFoodOrder = new AddDishFoodOrderInput();
             dishFoodOrder.setDish(dishesService.getDishByName(dishName));
+            dishFoodOrder.setFoodOrder(order);
             dishFoodOrdersService.addDishFoodOrder(dishFoodOrder);
         }
 
@@ -83,16 +85,15 @@ public class FoodOrdersService {
         return order;
     }
 
+    @Transactional
     public void deleteFoodOrder(final Long id) throws ItemNotFoundException {
         if (!foodOrdersRepository.existsById(id)) {
             throw new ItemNotFoundException("Food order with id = " + id + " does not exist");
         }
             dishFoodOrdersService.deleteDishFoodOrdersByFoodOrderId(id);
-            FoodOrder foodOrder = foodOrdersRepository.findById(id).get();
+            personalDatasService.deletePersonalData(foodOrdersRepository.findById(id).get().getPersonalData().getId());
+            addressesService.deleteAddress(foodOrdersRepository.findById(id).get().getAddress().getId());
             foodOrdersRepository.deleteById(id);
-            personalDatasService.deletePersonalData(foodOrder.getPersonalData().getId());
-            addressesService.deleteAddress(foodOrder.getAddress().getId());
-
     }
 
     public FoodOrder editFoodOrder(final FoodOrderDto foodOrderDto) throws ItemNotFoundException {

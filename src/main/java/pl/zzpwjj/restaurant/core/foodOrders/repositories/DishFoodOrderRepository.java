@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface DishFoodOrderRepository extends JpaRepository<DishFoodOrder, Long> {
 
-    void deleteAllById(Long id);
+    void deleteAllByFoodOrder_Id(Long id);
 
 }
