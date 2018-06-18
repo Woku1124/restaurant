@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
 import pl.zzpwjj.restaurant.core.dishes.model.entities.Dish;
 import pl.zzpwjj.restaurant.core.dishes.services.DishesService;
+import pl.zzpwjj.restaurant.core.finances.services.IncomesService;
 import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.Address;
 import pl.zzpwjj.restaurant.core.foodOrders.model.entities.DishFoodOrder;
@@ -49,6 +50,8 @@ public class FoodOrdersServiceTest {
     private DishFoodOrdersService dishFoodOrdersService;
     @Mock
     private EmailSenderService emailSenderService;
+    @Mock
+    private IncomesService incomesService;
 
 
     @Test

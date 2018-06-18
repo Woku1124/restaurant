@@ -28,8 +28,8 @@ public class FinancesEndpoint {
 
     private IncomesService incomesService;
     private IncomesConverter incomesConverter;
-    //private OutgoingsService outgoingsService;
-    //private OutgoingsConverter outgoingsConverter;
+    private OutgoingsService outgoingsService;
+    private OutgoingsConverter outgoingsConverter;
 
 
     @Autowired
@@ -37,8 +37,8 @@ public class FinancesEndpoint {
                              final OutgoingsService outgoingsService, OutgoingsConverter outgoingsConverter) {
         this.incomesService = incomesService;
         this.incomesConverter = incomesConverter;
-        //this.outgoingsService = outgoingsService;
-        //this.outgoingsConverter = outgoingsConverter;
+        this.outgoingsService = outgoingsService;
+        this.outgoingsConverter = outgoingsConverter;
     }
 
     @ApiOperation(value = "Returns all incomes")
@@ -70,7 +70,7 @@ public class FinancesEndpoint {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-/*
+
     @ApiOperation(value = "Returns all outgoings")
     @GetMapping("/getOutgoings")
     @Produces(MediaType.APPLICATION_JSON)
@@ -99,6 +99,6 @@ public class FinancesEndpoint {
         outgoingsService.paySalaries();
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-*/
+
 
 }

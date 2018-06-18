@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.InvalidParametersException;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
+import pl.zzpwjj.restaurant.core.finances.services.IncomesService;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddDishFoodOrderInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.input.AddFoodOrderInput;
 import pl.zzpwjj.restaurant.core.foodOrders.model.dto.FoodOrderDto;
@@ -27,17 +28,19 @@ public class FoodOrdersService {
     private DishFoodOrdersService dishFoodOrdersService;
     private DishesService dishesService;
     private EmailSenderService emailSenderService;
+    private IncomesService incomesService;
 
     @Autowired
     public FoodOrdersService(final FoodOrdersRepository foodOrdersRepository, final AddressesService addressesService,
                              final PersonalDatasService personalDatasService, final DishFoodOrdersService dishFoodOrdersService,
-                             final DishesService dishesService, EmailSenderService emailSenderService) {
+                             final DishesService dishesService, EmailSenderService emailSenderService, final IncomesService incomesService) {
         this.foodOrdersRepository = foodOrdersRepository;
         this.addressesService = addressesService;
         this.personalDatasService = personalDatasService;
         this.dishFoodOrdersService = dishFoodOrdersService;
         this.dishesService = dishesService;
         this.emailSenderService = emailSenderService;
+        this.incomesService = incomesService;
     }
 
     public List<FoodOrder> getFoodOrders() {
@@ -81,7 +84,7 @@ public class FoodOrdersService {
 
         emailSenderService.send(foodOrder.getAddress().getEmail(), "We received your order",
                     "Potwierdzamy złożenie zamówienia nr " + foodOrder.getId());
-
+        incomesService.addIncome(fullPrice);
         return order;
     }
 
