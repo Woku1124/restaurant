@@ -3,6 +3,7 @@ package pl.zzpwjj.restaurant.core.finances.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zzpwjj.restaurant.common.exceptions.ItemNotFoundException;
+import pl.zzpwjj.restaurant.core.employees.model.entities.Employee;
 import pl.zzpwjj.restaurant.core.employees.services.EmployeesService;
 import pl.zzpwjj.restaurant.core.finances.model.entities.Outgoing;
 import pl.zzpwjj.restaurant.core.finances.repositories.OutgoingsRepository;
@@ -39,8 +40,9 @@ public class OutgoingsService {
     }
 
     public void paySalaries() throws ItemNotFoundException {
-        for(long i=0; i<employeesService.getEmployees().size(); i++) {
-            addSalaryOutgoing(employeesService.getEmployee(i).getPesel(), employeesService.getEmployee(i).getSalary());
+        List<Employee> employees =  employeesService.getEmployees();
+        for(Employee employee: employees) {
+            addSalaryOutgoing(employee.getPesel(), employee.getSalary());
         }
     }
 }
