@@ -52,9 +52,9 @@ public class DishFoodOrdersService {
     }
 
 
-    public void editDishFoodOrder(final DishFoodOrderDto dishFoodOrderDto) throws InvalidParametersException {
+    public void editDishFoodOrder(final DishFoodOrderDto dishFoodOrderDto) throws ItemNotFoundException {
         if (!dishFoodOrderRepository.existsById(dishFoodOrderDto.getId())) {
-            throw new InvalidParametersException("DishFoodOrder with id = " + dishFoodOrderDto.getId() + " does not exist");
+            throw new ItemNotFoundException("DishFoodOrder with id = " + dishFoodOrderDto.getId() + " does not exist");
         }
 
         DishFoodOrder dishFoodOrder = new DishFoodOrder();
